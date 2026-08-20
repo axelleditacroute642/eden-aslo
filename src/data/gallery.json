@@ -1,0 +1,86 @@
+[
+  {
+    "id": "g1",
+    "seed": "gallery-nala-1",
+    "caption": "Nala de l'Eden d'Aslo, notre femelle reproductrice brown",
+    "category": "actuel",
+    "type": "chat"
+  },
+  {
+    "id": "g2",
+    "seed": "gallery-orion-play",
+    "caption": "Orion en pleine séance de jeu",
+    "category": "actuel",
+    "type": "chaton"
+  },
+  {
+    "id": "g3",
+    "seed": "gallery-freya-window",
+    "caption": "Freya à la fenêtre, guettant les oiseaux",
+    "category": "actuel",
+    "type": "chaton"
+  },
+  {
+    "id": "g4",
+    "seed": "gallery-litter-2026",
+    "caption": "La portée de mai 2026 au complet",
+    "category": "actuel",
+    "type": "chaton"
+  },
+  {
+    "id": "g5",
+    "seed": "gallery-zola-1",
+    "caption": "Zola de l'Eden d'Aslo, silhouette athlétique",
+    "category": "actuel",
+    "type": "chat"
+  },
+  {
+    "id": "g6",
+    "seed": "gallery-nova-silver",
+    "caption": "Nova et sa robe silver si particulière",
+    "category": "actuel",
+    "type": "chaton"
+  },
+  {
+    "id": "g7",
+    "seed": "gallery-past-milo",
+    "caption": "Milo, parti dans sa famille en 2024",
+    "category": "ancien",
+    "type": "chat"
+  },
+  {
+    "id": "g8",
+    "seed": "gallery-past-akira",
+    "caption": "Akira, une de nos plus belles portées 2023",
+    "category": "ancien",
+    "type": "chaton"
+  },
+  {
+    "id": "g9",
+    "seed": "gallery-past-luna",
+    "caption": "Luna, aujourd'hui reine de son foyer",
+    "category": "ancien",
+    "type": "chat"
+  },
+  {
+    "id": "g10",
+    "seed": "gallery-kaan-portrait",
+    "caption": "Kaan du Val Ambré, portrait",
+    "category": "actuel",
+    "type": "chat"
+  },
+  {
+    "id": "g11",
+    "seed": "gallery-simba-nap",
+    "caption": "Simba, sieste bien méritée",
+    "category": "actuel",
+    "type": "chaton"
+  },
+  {
+    "id": "g12",
+    "seed": "gallery-past-groupe",
+    "caption": "Retrouvailles d'anciens chatons de la chatterie",
+    "category": "ancien",
+    "type": "chat"
+  }
+]

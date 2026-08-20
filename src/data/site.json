@@ -1,0 +1,71 @@
+{
+  "_readme": "Fichier à modifier facilement par l'éleveuse : ce sont les textes et informations affichés sur le site. Pas besoin de toucher au code, seulement aux valeurs entre guillemets.",
+  "home": {
+    "tagline": "Un éden pour vos futurs compagnons (test admin)",
+    "intro": "Nichée au cœur de la nature, la chatterie l'Eden d'Aslo élève avec passion des chats Bengal au tempérament sauvage et au cœur tendre. Chaque portée grandit en famille, choyée et sociabilisée dès la naissance, pour vous offrir un compagnon d'exception, en pleine santé et déjà attaché à l'humain.",
+    "highlights": [
+      {
+        "title": "Élevage familial",
+        "text": "Un nombre restreint de portées par an, pour un suivi individuel de chaque chaton."
+      },
+      {
+        "title": "Santé & pedigree",
+        "text": "Reproducteurs testés, chatons identifiés, vaccinés et suivis vétérinairement, pedigree LOOF."
+      },
+      {
+        "title": "Sociabilisation",
+        "text": "Chatons élevés au sein du foyer, habitués aux enfants, aux bruits du quotidien et aux autres animaux."
+      }
+    ]
+  },
+  "pricing": {
+    "intro": "Le prix d'un chaton l'Eden d'Aslo reflète la qualité du suivi, de la sélection et des soins apportés depuis la naissance jusqu'au départ vers son nouveau foyer.",
+    "priceRange": "Entre 1800 € et 2200 € selon la lignée, la robe et le sexe du chaton.",
+    "includes": [
+      "Pedigree LOOF officiel",
+      "Identification par puce électronique",
+      "Vaccinations à jour (primo-vaccination + rappel)",
+      "Vermifugation et traitement antiparasitaire",
+      "Certificat vétérinaire de bonne santé",
+      "Test de dépistage FIV/FeLV des reproducteurs",
+      "Contrat de vente et certificat de rétractation",
+      "Kit de départ (alimentation, jouet, couverture avec l'odeur de la portée)",
+      "Suivi et conseils après l'adoption"
+    ],
+    "notes": "Un acompte de réservation est demandé pour valider une réservation ; le solde est réglé au départ du chaton, au plus tôt à 13 semaines."
+  },
+  "documents": [
+    {
+      "id": "pedigree",
+      "title": "Documentation officielle du pedigree",
+      "description": "Informations sur le LOOF (Livre Officiel des Origines Félines) et accès aux documents de pedigree de nos chats reproducteurs et de nos chatons.",
+      "filename": "documentation-pedigree.pdf"
+    },
+    {
+      "id": "contrat",
+      "title": "Contrat de vente type",
+      "description": "Modèle du contrat de vente remis à chaque adoption, conforme à la réglementation en vigueur.",
+      "filename": "contrat-de-vente-type.pdf"
+    },
+    {
+      "id": "retractation",
+      "title": "Certificat de rétractation",
+      "description": "Certificat vous permettant d'exercer votre droit de rétractation dans un délai d'une semaine après l'adoption.",
+      "filename": "certificat-de-retractation.pdf"
+    }
+  ],
+  "contact": {
+    "catteryName": "l'Eden d'Aslo",
+    "address": "12 chemin des Terres Sauvages",
+    "postalCode": "12345",
+    "city": "Nom de la ville",
+    "country": "France",
+    "phone": "06 12 34 56 78",
+    "email": "contact@edendaslo.fr",
+    "hours": "Sur rendez-vous, tous les jours de 9h à 19h",
+    "socials": {
+      "instagram": "@edendaslo",
+      "facebook": "l'Eden d'Aslo"
+    }
+  }
+}
