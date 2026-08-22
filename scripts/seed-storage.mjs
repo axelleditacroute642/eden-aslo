@@ -24,11 +24,17 @@ function requireEnv(name) {
 }
 
 async function main() {
+  // @vercel/blob prefers OIDC auth when VERCEL_OIDC_TOKEN is present, but the
+  // token written to a local .env file is always scoped to "development" and
+  // this project only has OIDC enabled for production/preview — drop it so
+  // the SDK falls back to the static BLOB_READ_WRITE_TOKEN passed explicitly below.
+  delete process.env.VERCEL_OIDC_TOKEN;
+
   const redis = new Redis({
     url: requireEnv("KV_REST_API_URL"),
     token: requireEnv("KV_REST_API_TOKEN"),
   });
-  requireEnv("BLOB_READ_WRITE_TOKEN");
+  const blobToken = requireEnv("BLOB_READ_WRITE_TOKEN");
 
   const site = JSON.parse(
     await readFile(path.join(ROOT, "src/data/site.json"), "utf-8")
@@ -47,6 +53,7 @@ async function main() {
     const blob = await put(`documents/${doc.id}-seed.pdf`, buffer, {
       access: "public",
       contentType: "application/pdf",
+      token: blobToken,
     });
     doc.url = blob.url;
     console.log(`  ${doc.filename} -> ${blob.url}`);
