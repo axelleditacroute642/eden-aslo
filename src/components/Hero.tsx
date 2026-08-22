@@ -12,7 +12,7 @@ export default function Hero({
   intro: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-eden-green text-eden-cream">
+    <section className="relative overflow-hidden bg-eden-green text-eden-cream border-b-2 border-eden-gold/40">
       <div className="absolute inset-0 bg-rosette-texture opacity-[0.15]" />
       <div
         className="absolute inset-0"

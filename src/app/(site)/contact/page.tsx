@@ -74,7 +74,7 @@ export default async function ContactPage() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.15}>
-          <div className="relative h-full min-h-[320px] rounded-xl overflow-hidden bg-eden-green text-eden-cream flex flex-col items-center justify-center text-center p-8 bg-rosette-texture">
+          <div className="relative h-full min-h-[320px] rounded-xl overflow-hidden bg-eden-green text-eden-cream flex flex-col items-center justify-center text-center p-8 bg-rosette-texture border border-eden-gold/40">
             <svg
               viewBox="0 0 24 24"
               width="40"

@@ -17,7 +17,7 @@ export default async function TarifsPage() {
       </AnimatedSection>
 
       <AnimatedSection delay={0.1} className="mt-8">
-        <div className="rounded-xl bg-eden-green text-eden-cream px-6 py-8 text-center">
+        <div className="rounded-xl bg-eden-green text-eden-cream px-6 py-8 text-center border border-eden-gold/40">
           <p className="text-sm uppercase tracking-widest text-eden-gold-light mb-2">
             Fourchette de prix
           </p>

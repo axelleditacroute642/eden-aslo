@@ -13,7 +13,7 @@ const LINKS = [
 export default async function Footer() {
   const site = await readSite();
   return (
-    <footer className="bg-eden-green text-eden-cream mt-24">
+    <footer className="bg-eden-green text-eden-cream mt-24 border-t-2 border-eden-gold/40">
       <div className="mx-auto max-w-6xl px-6 py-14 grid gap-10 sm:grid-cols-3">
         <div>
           <Logo monochrome className="text-eden-gold-light [&_div]:text-eden-cream" />
