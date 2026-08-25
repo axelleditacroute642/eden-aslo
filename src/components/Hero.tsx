@@ -32,7 +32,7 @@ export default function Hero({
             variant="full"
             dark
             showWordmark={false}
-            className="[&_svg]:w-24 [&_svg]:h-24 sm:[&_svg]:w-32 sm:[&_svg]:h-32 justify-center mb-6"
+            className="[&_svg]:w-36 [&_svg]:h-36 sm:[&_svg]:w-48 sm:[&_svg]:h-48 justify-center mb-6"
           />
         </motion.div>
 
