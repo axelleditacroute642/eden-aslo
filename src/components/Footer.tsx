@@ -16,7 +16,7 @@ export default async function Footer() {
     <footer className="bg-eden-green text-eden-cream mt-24 border-t-2 border-eden-gold/40">
       <div className="mx-auto max-w-6xl px-6 py-14 grid gap-10 sm:grid-cols-3">
         <div>
-          <Logo monochrome className="text-eden-gold-light [&_div]:text-eden-cream" />
+          <Logo dark />
           <p className="mt-4 text-sm text-eden-cream/70 max-w-xs">
             Chatterie de Bengals — élevage familial, chatons LOOF sociabilisés
             dès la naissance.
@@ -50,7 +50,7 @@ export default async function Footer() {
         </div>
       </div>
       <div className="border-t border-eden-cream/10 py-5 text-center text-xs text-eden-cream/50">
-        © {new Date().getFullYear()} l&apos;Eden d&apos;Aslo — Tous droits réservés
+        © {new Date().getFullYear()} L&apos;Eden d&apos;Aslo — Tous droits réservés
       </div>
     </footer>
   );

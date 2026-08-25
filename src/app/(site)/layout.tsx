@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Jost } from "next/font/google";
+import { Playfair_Display, Jost, Montserrat } from "next/font/google";
 import "../globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,10 +20,16 @@ const jost = Jost({
   weight: ["300", "400", "500", "600"],
 });
 
+const montserrat = Montserrat({
+  variable: "--font-mont-raw",
+  subsets: ["latin"],
+  weight: ["600"],
+});
+
 export const metadata: Metadata = {
-  title: "l'Eden d'Aslo — Chatterie de Bengals",
+  title: "L'Eden d'Aslo — Chatterie de Bengals",
   description:
-    "l'Eden d'Aslo, chatterie de Bengals : chatons disponibles, documentation officielle, galerie et contact.",
+    "L'Eden d'Aslo, chatterie de Bengals : chatons disponibles, documentation officielle, galerie et contact.",
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
@@ -31,7 +37,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="fr"
-      className={`${playfair.variable} ${jost.variable} h-full antialiased`}
+      className={`${playfair.variable} ${jost.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-eden-cream text-eden-ink">
         <Navbar kittens={kittens} />

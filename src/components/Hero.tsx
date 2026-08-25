@@ -29,6 +29,8 @@ export default function Hero({
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <Logo
+            variant="full"
+            dark
             showWordmark={false}
             className="[&_svg]:w-24 [&_svg]:h-24 sm:[&_svg]:w-32 sm:[&_svg]:h-32 justify-center mb-6"
           />
@@ -40,7 +42,7 @@ export default function Hero({
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="font-heading text-4xl sm:text-6xl text-shadow-soft"
         >
-          l&apos;Eden d&apos;Aslo
+          L&apos;Eden d&apos;Aslo
         </motion.h1>
 
         <motion.p

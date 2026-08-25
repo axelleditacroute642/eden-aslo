@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="l'Eden d'Aslo">
+  <title>l'Eden d'Aslo</title>
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#D6AC55" stroke-width="2.2"></circle>
+  <circle cx="50" cy="50" r="39" fill="none" stroke="#D6AC55" stroke-width="0.7" opacity="0.6"></circle>
+  <text x="50" y="55" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="38" letter-spacing="1" fill="#EDE7CE">EA</text>
+  <g fill="#7EAF88">
+    <path d="M0 -5.5 C4.6 -1.5 4 3.4 0 5.5 C-4 3.4 -4.6 -1.5 0 -5.5 Z" transform="translate(41.5,66.5) rotate(-34)"></path>
+    <path d="M0 -5.5 C4.6 -1.5 4 3.4 0 5.5 C-4 3.4 -4.6 -1.5 0 -5.5 Z" transform="translate(50,64.5)"></path>
+    <path d="M0 -5.5 C4.6 -1.5 4 3.4 0 5.5 C-4 3.4 -4.6 -1.5 0 -5.5 Z" transform="translate(58.5,66.5) rotate(34)"></path>
+  </g>
+  <text x="50" y="79" text-anchor="middle" font-family="Montserrat, Helvetica, Arial, sans-serif" font-size="7.5" letter-spacing="2.6" fill="#D6AC55">BENGAL</text>
+</svg>

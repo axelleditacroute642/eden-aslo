@@ -1,78 +1,109 @@
-const ROSETTE_ANGLES = [0, 60, 120, 180, 240, 300];
+const LEAF =
+  "M0 -5.5 C4.6 -1.5 4 3.4 0 5.5 C-4 3.4 -4.6 -1.5 0 -5.5 Z";
 
-function Rosette({ angle }: { angle: number }) {
+const MONT_STYLE = {
+  fontFamily: "var(--font-mont-raw), Helvetica, Arial, sans-serif",
+};
+
+function FullMark({ dark }: { dark: boolean }) {
+  const ring = dark ? "#D6AC55" : "#C08F2E";
+  const initials = dark ? "#EDE7CE" : "#24422F";
+  const leaves = dark ? "#7EAF88" : "#2E6B45";
+  const bengal = dark ? "#D6AC55" : "#9C8A5C";
+
   return (
-    <g transform={`rotate(${angle} 60 60)`}>
-      <g transform="translate(60 14)">
-        <path
-          d="M -7 6 C -9 -1 -4 -6 0 -6 C 4 -6 9 -1 7 6 C 6 11 -6 11 -7 6 Z"
-          fill="none"
-          stroke="var(--eden-rosette, #3a2416)"
-          strokeWidth="2.4"
-          strokeLinejoin="round"
-        />
-        <circle cx="0" cy="1.5" r="2.1" fill="var(--eden-rust, #a8552e)" />
+    <svg viewBox="0 0 100 100" role="img" aria-label="l'Eden d'Aslo" className="shrink-0">
+      <title>l&apos;Eden d&apos;Aslo</title>
+      <circle cx="50" cy="50" r="45" fill="none" stroke={ring} strokeWidth="2.2" />
+      <circle cx="50" cy="50" r="39" fill="none" stroke={ring} strokeWidth="0.7" opacity="0.6" />
+      <text
+        x="50"
+        y="55"
+        textAnchor="middle"
+        fontFamily="var(--font-heading-raw), Georgia, serif"
+        fontSize="38"
+        letterSpacing="1"
+        fill={initials}
+      >
+        EA
+      </text>
+      <g fill={leaves}>
+        <path d={LEAF} transform="translate(41.5,66.5) rotate(-34)" />
+        <path d={LEAF} transform="translate(50,64.5)" />
+        <path d={LEAF} transform="translate(58.5,66.5) rotate(34)" />
       </g>
-    </g>
+      <text
+        x="50"
+        y="79"
+        textAnchor="middle"
+        style={MONT_STYLE}
+        fontSize="7.5"
+        letterSpacing="2.6"
+        fill={bengal}
+      >
+        BENGAL
+      </text>
+    </svg>
+  );
+}
+
+function HeaderMark({ dark }: { dark: boolean }) {
+  const ring = dark ? "#D6AC55" : "#C08F2E";
+  const initials = dark ? "#EDE7CE" : "#24422F";
+  const leaves = dark ? "#7EAF88" : "#2E6B45";
+
+  return (
+    <svg viewBox="0 0 100 100" width="48" height="48" role="img" aria-label="l'Eden d'Aslo" className="shrink-0">
+      <title>l&apos;Eden d&apos;Aslo</title>
+      <circle cx="50" cy="50" r="45" fill="none" stroke={ring} strokeWidth="2.6" />
+      <text
+        x="50"
+        y="56"
+        textAnchor="middle"
+        fontFamily="var(--font-heading-raw), Georgia, serif"
+        fontSize="40"
+        letterSpacing="1"
+        fill={initials}
+      >
+        EA
+      </text>
+      <g fill={leaves}>
+        <path d={LEAF} transform="translate(41.5,71) rotate(-34)" />
+        <path d={LEAF} transform="translate(50,69)" />
+        <path d={LEAF} transform="translate(58.5,71) rotate(34)" />
+      </g>
+    </svg>
   );
 }
 
 export default function Logo({
   className = "",
+  variant = "header",
+  dark = false,
   showWordmark = true,
-  monochrome = false,
 }: {
   className?: string;
+  variant?: "header" | "full";
+  dark?: boolean;
   showWordmark?: boolean;
-  monochrome?: boolean;
 }) {
-  const ring = monochrome ? "currentColor" : "var(--eden-gold, #c69a45)";
-  const center = monochrome ? "currentColor" : "var(--eden-green, #16301f)";
-  const eye = monochrome ? "currentColor" : "var(--eden-gold-light, #e6c886)";
-
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <svg
-        viewBox="0 0 120 120"
-        width="48"
-        height="48"
-        role="img"
-        aria-label="Logo l'Eden d'Aslo"
-        className="shrink-0"
-      >
-        <circle
-          cx="60"
-          cy="60"
-          r="57"
-          fill={center}
-          stroke={ring}
-          strokeWidth="2"
-        />
-        {ROSETTE_ANGLES.map((a) => (
-          <Rosette key={a} angle={a} />
-        ))}
-        {/* stylized feline almond eye at the center, doubling as a leaf/eden motif */}
-        <path
-          d="M 38 60 C 46 46 74 46 82 60 C 74 74 46 74 38 60 Z"
-          fill="none"
-          stroke={eye}
-          strokeWidth="2.5"
-        />
-        <ellipse cx="60" cy="60" rx="5.5" ry="10" fill={eye} />
-        <path
-          d="M 60 40 C 62 48 62 72 60 80"
-          fill="none"
-          stroke={eye}
-          strokeWidth="1"
-          opacity="0.5"
-        />
-      </svg>
+      {variant === "full" ? <FullMark dark={dark} /> : <HeaderMark dark={dark} />}
       {showWordmark && (
         <div className="leading-tight">
-          <div className="font-heading text-lg sm:text-xl tracking-wide">
-            l&apos;Eden d&apos;Aslo
+          <div
+            className={`font-heading text-lg sm:text-xl tracking-wide ${
+              dark ? "text-eden-gold-light" : ""
+            }`}
+          >
+            L&apos;Eden d&apos;Aslo
           </div>
-          <div className="text-[10px] sm:text-xs uppercase tracking-[0.25em] opacity-70">
+          <div
+            className={`text-[10px] sm:text-xs uppercase tracking-[0.25em] ${
+              dark ? "text-eden-cream/70" : "opacity-70"
+            }`}
+          >
             Chatterie de Bengals
           </div>
         </div>
