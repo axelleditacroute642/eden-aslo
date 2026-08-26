@@ -81,7 +81,7 @@ export default async function ContactPage() {
           <div className="relative h-full min-h-[320px] rounded-xl overflow-hidden border border-eden-gold/40">
             <iframe
               title={`Carte de ${contact.city}`}
-              src="https://www.openstreetmap.org/export/embed.html?bbox=4.9280%2C45.6740%2C4.9880%2C45.7220&layer=mapnik"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=4.9280%2C45.6740%2C4.9880%2C45.7220&layer=mapnik&marker=45.6975%2C4.9508"
               className="absolute inset-0 h-full w-full grayscale-[15%]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -89,8 +89,8 @@ export default async function ContactPage() {
             <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-eden-green/90 to-transparent p-5 pt-10">
               <p className="font-heading text-lg text-eden-cream">{contact.catteryName}</p>
               <p className="text-sm text-eden-cream/80">
-                {contact.city}, {contact.country} — zone approximative, adresse
-                exacte communiquée sur rendez-vous.
+                {contact.city}, {contact.country} — repère sur le centre-ville,
+                adresse exacte communiquée sur rendez-vous.
               </p>
             </div>
           </div>
