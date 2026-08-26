@@ -5,6 +5,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import PhotoCarousel from "@/components/PhotoCarousel";
 import GenealogyTree from "@/components/GenealogyTree";
 import { formatPrice, getAgeLabel, getKittenBySlug } from "@/lib/kittens";
+import { readSite } from "@/lib/store";
 
 export async function generateMetadata({
   params,
@@ -13,7 +14,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const kitten = await getKittenBySlug(slug);
-  return { title: kitten ? `${kitten.name} — l'Eden d'Aslo` : "Chaton introuvable" };
+  return { title: kitten ? `${kitten.name} — L'Eden d'Aslo` : "Chaton introuvable" };
 }
 
 export default async function KittenPage({
@@ -22,8 +23,14 @@ export default async function KittenPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const kitten = await getKittenBySlug(slug);
+  const [kitten, site] = await Promise.all([getKittenBySlug(slug), readSite()]);
   if (!kitten) notFound();
+  const { contact } = site;
+  const mailtoHref = `mailto:${contact.email}?subject=${encodeURIComponent(
+    `Réservation — ${kitten.name}`
+  )}&body=${encodeURIComponent(
+    `Bonjour,\n\nJe suis intéressé(e) par ${kitten.name} et j'aimerais avoir plus d'informations en vue d'une réservation.\n\nMerci,`
+  )}`;
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
@@ -93,12 +100,15 @@ export default async function KittenPage({
             </dl>
           </div>
 
-          <Link
-            href="/contact"
+          <a
+            href={mailtoHref}
             className="mt-6 inline-block px-6 py-3 rounded-full bg-eden-rust text-eden-cream hover:bg-eden-rust/90 hover:scale-105 transition-all"
           >
-            Faire une demande pour {kitten.name}
-          </Link>
+            Réserver {kitten.name}
+          </a>
+          <p className="mt-2 text-xs text-eden-ink/50">
+            Ou par téléphone au {contact.phone} (à titre informatif).
+          </p>
         </AnimatedSection>
       </div>
 
