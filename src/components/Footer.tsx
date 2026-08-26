@@ -43,7 +43,10 @@ export default async function Footer() {
             Contact
           </h3>
           <ul className="space-y-2 text-sm text-eden-cream/80">
-            <li>{site.contact.address}, {site.contact.postalCode} {site.contact.city}</li>
+            <li>
+              {site.contact.address ? `${site.contact.address}, ` : ""}
+              {site.contact.postalCode} {site.contact.city}
+            </li>
             <li>{site.contact.phone}</li>
             <li>{site.contact.email}</li>
           </ul>

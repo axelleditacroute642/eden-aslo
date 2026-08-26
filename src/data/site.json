@@ -2,7 +2,7 @@
   "_readme": "Fichier à modifier facilement par l'éleveuse : ce sont les textes et informations affichés sur le site. Pas besoin de toucher au code, seulement aux valeurs entre guillemets.",
   "home": {
     "tagline": "Un éden pour vos futurs compagnons (test admin)",
-    "intro": "Nichée au cœur de la nature, la chatterie l'Eden d'Aslo élève avec passion des chats Bengal au tempérament sauvage et au cœur tendre. Chaque portée grandit en famille, choyée et sociabilisée dès la naissance, pour vous offrir un compagnon d'exception, en pleine santé et déjà attaché à l'humain.",
+    "intro": "Nichée au cœur de la nature, la chatterie L'Eden d'Aslo élève avec passion des chats Bengal au tempérament sauvage et au cœur tendre. Chaque portée grandit en famille, choyée et sociabilisée dès la naissance, pour vous offrir un compagnon d'exception, en pleine santé et déjà attaché à l'humain.",
     "highlights": [
       {
         "title": "Élevage familial",
@@ -19,7 +19,7 @@
     ]
   },
   "pricing": {
-    "intro": "Le prix d'un chaton l'Eden d'Aslo reflète la qualité du suivi, de la sélection et des soins apportés depuis la naissance jusqu'au départ vers son nouveau foyer.",
+    "intro": "Le prix d'un chaton L'Eden d'Aslo reflète la qualité du suivi, de la sélection et des soins apportés depuis la naissance jusqu'au départ vers son nouveau foyer.",
     "priceRange": "Entre 1800 € et 2200 € selon la lignée, la robe et le sexe du chaton.",
     "includes": [
       "Pedigree LOOF officiel",
@@ -55,17 +55,17 @@
     }
   ],
   "contact": {
-    "catteryName": "l'Eden d'Aslo",
-    "address": "12 chemin des Terres Sauvages",
-    "postalCode": "12345",
-    "city": "Nom de la ville",
+    "catteryName": "L'Eden d'Aslo",
+    "address": "",
+    "postalCode": "69800",
+    "city": "Saint Priest",
     "country": "France",
     "phone": "06 12 34 56 78",
     "email": "contact@edendaslo.fr",
     "hours": "Sur rendez-vous, tous les jours de 9h à 19h",
     "socials": {
       "instagram": "@edendaslo",
-      "facebook": "l'Eden d'Aslo"
+      "facebook": "L'Eden d'Aslo"
     }
   }
 }
