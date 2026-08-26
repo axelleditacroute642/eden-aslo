@@ -93,8 +93,8 @@ export default async function ContactPage() {
                 adresse exacte communiquée sur rendez-vous.
               </p>
               <p className="mt-1.5 text-xs text-eden-cream/55">
-                À proximité de Lyon (15 min), l&apos;aéroport Lyon-Saint-Exupéry
-                (15 min) et Vienne (25 min).
+                À proximité de Lyon (15 min), Vienne (25 min), Annecy (1h10),
+                Valence (1h15) et Clermont-Ferrand (2h15).
               </p>
             </div>
           </div>
