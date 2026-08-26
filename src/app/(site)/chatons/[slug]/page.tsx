@@ -26,11 +26,11 @@ export default async function KittenPage({
   const [kitten, site] = await Promise.all([getKittenBySlug(slug), readSite()]);
   if (!kitten) notFound();
   const { contact } = site;
-  const mailtoHref = `mailto:${contact.email}?subject=${encodeURIComponent(
-    `Réservation — ${kitten.name}`
-  )}&body=${encodeURIComponent(
-    `Bonjour,\n\nJe suis intéressé(e) par ${kitten.name} et j'aimerais avoir plus d'informations en vue d'une réservation.\n\nMerci,`
-  )}`;
+  const subject = `Réservation — ${kitten.name}`;
+  const body = `Bonjour,\n\nJe suis intéressé(e) par ${kitten.name} et j'aimerais avoir plus d'informations en vue d'une réservation.\n\nMerci,`;
+  const gmailComposeHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+    contact.email
+  )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
@@ -101,7 +101,9 @@ export default async function KittenPage({
           </div>
 
           <a
-            href={mailtoHref}
+            href={gmailComposeHref}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-6 inline-block px-6 py-3 rounded-full bg-eden-rust text-eden-cream hover:bg-eden-rust/90 hover:scale-105 transition-all"
           >
             Réserver {kitten.name}
