@@ -92,6 +92,10 @@ export default async function ContactPage() {
                 {contact.city}, {contact.country} — repère sur le centre-ville,
                 adresse exacte communiquée sur rendez-vous.
               </p>
+              <p className="mt-1.5 text-xs text-eden-cream/55">
+                À proximité de Lyon (15 min), l&apos;aéroport Lyon-Saint-Exupéry
+                (15 min) et Vienne (25 min).
+              </p>
             </div>
           </div>
         </AnimatedSection>
