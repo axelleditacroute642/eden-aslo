@@ -14,7 +14,8 @@ function PersonNode({
   size?: "sm" | "md" | "lg";
   highlight?: boolean;
 }) {
-  const dims = size === "lg" ? "w-24 h-24" : size === "md" ? "w-16 h-16" : "w-12 h-12";
+  const dims =
+    size === "lg" ? "w-24 h-24" : size === "md" ? "w-20 h-20 sm:w-24 sm:h-24" : "w-12 h-12";
   const textSize = size === "lg" ? "text-base" : size === "md" ? "text-sm" : "text-xs";
 
   return (
