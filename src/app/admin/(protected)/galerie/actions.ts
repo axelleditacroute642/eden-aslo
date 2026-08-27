@@ -4,6 +4,16 @@ import { revalidatePath } from "next/cache";
 import { readGallery, writeGallery } from "@/lib/store";
 import { saveUploadedImage, deleteUploadedImage } from "@/lib/uploads";
 
+function readPhotoPosition(formData: FormData) {
+  const x = Number(formData.get("posX"));
+  const y = Number(formData.get("posY"));
+  if (!Number.isFinite(x) || !Number.isFinite(y)) return undefined;
+  return {
+    x: Math.min(100, Math.max(0, Math.round(x))),
+    y: Math.min(100, Math.max(0, Math.round(y))),
+  };
+}
+
 export async function addGalleryPhoto(formData: FormData) {
   const gallery = await readGallery();
   const file = formData.get("photo");
@@ -35,7 +45,10 @@ export async function updateGalleryPhoto(id: string, formData: FormData) {
     if (url) {
       await deleteUploadedImage(gallery[index].seed);
       gallery[index].seed = url;
+      gallery[index].position = undefined;
     }
+  } else {
+    gallery[index].position = readPhotoPosition(formData) ?? gallery[index].position;
   }
 
   gallery[index].caption = String(formData.get("caption") ?? gallery[index].caption);

@@ -10,6 +10,7 @@ export type Photo = {
   caption: string;
   category: "actuel" | "ancien";
   type: "chat" | "chaton";
+  position?: { x: number; y: number };
 };
 
 const FILTERS = [
@@ -63,6 +64,7 @@ export default function Gallery({ photos }: { photos: Photo[] }) {
               <div className="transition-transform duration-500 group-hover:scale-110">
                 <PlaceholderPhoto
                   seed={p.seed}
+                  position={p.position}
                   rounded=""
                   className={i % 3 === 0 ? "aspect-[3/4]" : "aspect-square"}
                 />
@@ -122,6 +124,7 @@ export default function Gallery({ photos }: { photos: Photo[] }) {
             >
               <PlaceholderPhoto
                 seed={openPhoto.seed}
+                position={openPhoto.position}
                 rounded="rounded-xl"
                 className="aspect-[4/3] w-full shadow-2xl"
               />

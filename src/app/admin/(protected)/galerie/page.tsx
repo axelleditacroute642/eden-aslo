@@ -3,10 +3,15 @@ import { addGalleryPhoto, updateGalleryPhoto, deleteGalleryPhoto } from "./actio
 import SubmitButton from "@/components/admin/SubmitButton";
 import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
 import PlaceholderPhoto from "@/components/PlaceholderPhoto";
+import FocalPointPicker from "@/components/admin/FocalPointPicker";
 import { pageTitleClass, cardClass, sectionTitleClass, labelClass, inputClass } from "@/components/admin/ui";
 
 const fileInputClass =
   "block w-full text-xs text-slate-600 file:mr-2 file:rounded-md file:border-0 file:bg-slate-100 file:px-2 file:py-1 file:text-xs file:font-medium hover:file:bg-slate-200";
+
+function isRealPhoto(seed: string): boolean {
+  return seed?.startsWith("/uploads/") || seed?.startsWith("http");
+}
 
 export default async function AdminGaleriePage() {
   const gallery = await readGallery();
@@ -49,7 +54,12 @@ export default async function AdminGaleriePage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {gallery.map((p) => (
           <form key={p.id} action={updateGalleryPhoto.bind(null, p.id)} className={`${cardClass} space-y-2`}>
-            <PlaceholderPhoto seed={p.seed} rounded="rounded-md" className="aspect-square" />
+            <PlaceholderPhoto
+              seed={p.seed}
+              position={p.position}
+              rounded="rounded-md"
+              className="aspect-square"
+            />
             <input name="caption" defaultValue={p.caption} placeholder="Légende" className={inputClass} />
             <div className="flex gap-2">
               <select name="category" defaultValue={p.category} className={inputClass}>
@@ -62,6 +72,16 @@ export default async function AdminGaleriePage() {
               </select>
             </div>
             <input type="file" name="photo" accept="image/*" className={fileInputClass} />
+            {isRealPhoto(p.seed) && (
+              <FocalPointPicker
+                src={p.seed}
+                nameX="posX"
+                nameY="posY"
+                defaultX={p.position?.x ?? 50}
+                defaultY={p.position?.y ?? 50}
+                previewShape="square"
+              />
+            )}
             <div className="flex items-center justify-between pt-1">
               <SubmitButton
                 className="text-sm rounded-md border border-slate-300 px-3 py-1.5 hover:bg-slate-50"

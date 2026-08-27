@@ -8,12 +8,14 @@ export default function FocalPointPicker({
   nameY,
   defaultX = 50,
   defaultY = 50,
+  previewShape = "circle",
 }: {
   src: string;
   nameX: string;
   nameY: string;
   defaultX?: number;
   defaultY?: number;
+  previewShape?: "circle" | "square";
 }) {
   const [pos, setPos] = useState({ x: defaultX, y: defaultY });
   const imgRef = useRef<HTMLImageElement>(null);
@@ -44,7 +46,11 @@ export default function FocalPointPicker({
       </div>
 
       <div className="flex flex-col items-center gap-1 shrink-0">
-        <div className="relative h-14 w-14 overflow-hidden rounded-full border border-slate-300 bg-slate-100">
+        <div
+          className={`relative h-14 w-14 overflow-hidden border border-slate-300 bg-slate-100 ${
+            previewShape === "circle" ? "rounded-full" : "rounded-md"
+          }`}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={src}
