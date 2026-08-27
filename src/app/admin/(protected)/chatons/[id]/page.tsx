@@ -10,6 +10,7 @@ import {
 import SubmitButton from "@/components/admin/SubmitButton";
 import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
 import PlaceholderPhoto from "@/components/PlaceholderPhoto";
+import FocalPointPicker from "@/components/admin/FocalPointPicker";
 import {
   pageTitleClass,
   cardClass,
@@ -21,6 +22,10 @@ import {
 
 const fileInputClass =
   "block w-full text-xs text-slate-600 file:mr-2 file:rounded-md file:border-0 file:bg-slate-100 file:px-2 file:py-1 file:text-xs file:font-medium hover:file:bg-slate-200";
+
+function isRealPhoto(seed: string): boolean {
+  return seed?.startsWith("/uploads/") || seed?.startsWith("http");
+}
 
 function GrandparentFields({
   prefix,
@@ -34,7 +39,12 @@ function GrandparentFields({
   return (
     <div className="rounded-md border border-slate-200 p-3 space-y-2">
       <div className="flex items-center gap-2 mb-1">
-        <PlaceholderPhoto seed={gp.photoSeed || prefix} rounded="rounded-full" className="w-10 h-10 shrink-0" />
+        <PlaceholderPhoto
+          seed={gp.photoSeed || prefix}
+          position={gp.photoPosition}
+          rounded="rounded-full"
+          className="w-10 h-10 shrink-0"
+        />
         <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">{label}</p>
       </div>
       <input name={`${prefix}-name`} defaultValue={gp.name} placeholder="Nom" className={inputClass} />
@@ -46,6 +56,15 @@ function GrandparentFields({
         className={inputClass}
       />
       <input type="file" name={`${prefix}-photo`} accept="image/*" className={fileInputClass} />
+      {isRealPhoto(gp.photoSeed) && (
+        <FocalPointPicker
+          src={gp.photoSeed}
+          nameX={`${prefix}-posX`}
+          nameY={`${prefix}-posY`}
+          defaultX={gp.photoPosition?.x ?? 50}
+          defaultY={gp.photoPosition?.y ?? 50}
+        />
+      )}
     </div>
   );
 }
@@ -62,7 +81,12 @@ function ParentFields({
   return (
     <div className="rounded-lg border border-slate-300 p-4 space-y-3">
       <div className="flex items-center gap-3">
-        <PlaceholderPhoto seed={parent.photoSeed || prefix} rounded="rounded-full" className="w-14 h-14 shrink-0" />
+        <PlaceholderPhoto
+          seed={parent.photoSeed || prefix}
+          position={parent.photoPosition}
+          rounded="rounded-full"
+          className="w-14 h-14 shrink-0"
+        />
         <p className="font-medium text-slate-800">{label}</p>
       </div>
       <input name={`${prefix}-name`} defaultValue={parent.name} placeholder="Nom" className={inputClass} />
@@ -75,6 +99,15 @@ function ParentFields({
         className={inputClass}
       />
       <input type="file" name={`${prefix}-photo`} accept="image/*" className={fileInputClass} />
+      {isRealPhoto(parent.photoSeed) && (
+        <FocalPointPicker
+          src={parent.photoSeed}
+          nameX={`${prefix}-posX`}
+          nameY={`${prefix}-posY`}
+          defaultX={parent.photoPosition?.x ?? 50}
+          defaultY={parent.photoPosition?.y ?? 50}
+        />
+      )}
 
       <div className="grid grid-cols-2 gap-3 pt-2">
         <GrandparentFields prefix={`${prefix}-gf`} label="Père" gp={parent.parents.father} />

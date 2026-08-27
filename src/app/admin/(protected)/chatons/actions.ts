@@ -39,24 +39,37 @@ function emptyParent(): Parent {
   };
 }
 
+function readPhotoPosition(formData: FormData, prefix: string) {
+  const x = Number(formData.get(`${prefix}-posX`));
+  const y = Number(formData.get(`${prefix}-posY`));
+  if (!Number.isFinite(x) || !Number.isFinite(y)) return undefined;
+  return {
+    x: Math.min(100, Math.max(0, Math.round(x))),
+    y: Math.min(100, Math.max(0, Math.round(y))),
+  };
+}
+
 async function buildGrandparent(
   formData: FormData,
   prefix: string,
   existing: Grandparent
 ): Promise<Grandparent> {
   let photoSeed = String(formData.get(`${prefix}-photoSeed`) ?? existing.photoSeed);
+  let photoPosition = readPhotoPosition(formData, prefix) ?? existing.photoPosition;
   const photoFile = formData.get(`${prefix}-photo`);
   if (photoFile instanceof File && photoFile.size > 0) {
     const url = await saveUploadedImage(photoFile, "parents");
     if (url) {
       await deleteUploadedImage(existing.photoSeed);
       photoSeed = url;
+      photoPosition = undefined;
     }
   }
 
   return {
     name: String(formData.get(`${prefix}-name`) ?? existing.name),
     photoSeed,
+    photoPosition,
     pedigree: String(formData.get(`${prefix}-pedigree`) ?? existing.pedigree),
   };
 }
@@ -67,18 +80,21 @@ async function buildParent(
   existing: Parent
 ): Promise<Parent> {
   let photoSeed = String(formData.get(`${prefix}-photoSeed`) ?? existing.photoSeed);
+  let photoPosition = readPhotoPosition(formData, prefix) ?? existing.photoPosition;
   const photoFile = formData.get(`${prefix}-photo`);
   if (photoFile instanceof File && photoFile.size > 0) {
     const url = await saveUploadedImage(photoFile, "parents");
     if (url) {
       await deleteUploadedImage(existing.photoSeed);
       photoSeed = url;
+      photoPosition = undefined;
     }
   }
 
   return {
     name: String(formData.get(`${prefix}-name`) ?? existing.name),
     photoSeed,
+    photoPosition,
     pedigree: String(formData.get(`${prefix}-pedigree`) ?? existing.pedigree),
     coat: String(formData.get(`${prefix}-coat`) ?? existing.coat),
     parents: {

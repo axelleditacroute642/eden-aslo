@@ -23,11 +23,13 @@ export default function PlaceholderPhoto({
   label,
   className = "",
   rounded = "rounded-xl",
+  position,
 }: {
   seed: string;
   label?: string;
   className?: string;
   rounded?: string;
+  position?: { x: number; y: number };
 }) {
   if (seed?.startsWith("/uploads/") || seed?.startsWith("http")) {
     return (
@@ -38,6 +40,9 @@ export default function PlaceholderPhoto({
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover"
+          style={
+            position ? { objectPosition: `${position.x}% ${position.y}%` } : undefined
+          }
         />
         {label && (
           <>

@@ -4,12 +4,14 @@ import type { Kitten } from "@/lib/kittens";
 function PersonNode({
   name,
   photoSeed,
+  photoPosition,
   subtitle,
   size = "md",
   highlight = false,
 }: {
   name: string;
   photoSeed: string;
+  photoPosition?: { x: number; y: number };
   subtitle?: string;
   size?: "sm" | "md" | "lg";
   highlight?: boolean;
@@ -22,6 +24,7 @@ function PersonNode({
     <div className="flex flex-col items-center text-center w-28 sm:w-32">
       <PlaceholderPhoto
         seed={photoSeed}
+        position={photoPosition}
         rounded="rounded-full"
         className={`${dims} ring-2 ${highlight ? "ring-eden-gold" : "ring-eden-gold/30"}`}
       />
@@ -54,12 +57,14 @@ export default function GenealogyTree({ kitten }: { kitten: Kitten }) {
               <PersonNode
                 name={father.parents.father.name}
                 photoSeed={father.parents.father.photoSeed}
+                photoPosition={father.parents.father.photoPosition}
                 subtitle={father.parents.father.pedigree}
                 size="sm"
               />
               <PersonNode
                 name={father.parents.mother.name}
                 photoSeed={father.parents.mother.photoSeed}
+                photoPosition={father.parents.mother.photoPosition}
                 subtitle={father.parents.mother.pedigree}
                 size="sm"
               />
@@ -68,6 +73,7 @@ export default function GenealogyTree({ kitten }: { kitten: Kitten }) {
             <PersonNode
               name={father.name}
               photoSeed={father.photoSeed}
+              photoPosition={father.photoPosition}
               subtitle={father.pedigree}
               size="md"
             />
@@ -78,12 +84,14 @@ export default function GenealogyTree({ kitten }: { kitten: Kitten }) {
               <PersonNode
                 name={mother.parents.father.name}
                 photoSeed={mother.parents.father.photoSeed}
+                photoPosition={mother.parents.father.photoPosition}
                 subtitle={mother.parents.father.pedigree}
                 size="sm"
               />
               <PersonNode
                 name={mother.parents.mother.name}
                 photoSeed={mother.parents.mother.photoSeed}
+                photoPosition={mother.parents.mother.photoPosition}
                 subtitle={mother.parents.mother.pedigree}
                 size="sm"
               />
@@ -92,6 +100,7 @@ export default function GenealogyTree({ kitten }: { kitten: Kitten }) {
             <PersonNode
               name={mother.name}
               photoSeed={mother.photoSeed}
+              photoPosition={mother.photoPosition}
               subtitle={mother.pedigree}
               size="md"
             />

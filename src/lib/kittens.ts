@@ -1,14 +1,18 @@
 import { readKittens } from "@/lib/store";
 
+export type PhotoPosition = { x: number; y: number };
+
 export type Grandparent = {
   name: string;
   photoSeed: string;
+  photoPosition?: PhotoPosition;
   pedigree: string;
 };
 
 export type Parent = {
   name: string;
   photoSeed: string;
+  photoPosition?: PhotoPosition;
   pedigree: string;
   coat: string;
   parents: {
