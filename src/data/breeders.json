@@ -36,21 +36,21 @@
     "photos": ["mother-simba", "gallery-zola-1"]
   },
   {
-    "id": "breeder-bulle",
-    "slug": "bulle",
-    "name": "Bulle",
-    "sex": "Femelle",
-    "role": "Reproductrice",
+    "id": "breeder-maracuja",
+    "slug": "maracuja",
+    "name": "Maracuja des Terres Sauvages",
+    "sex": "Mâle",
+    "role": "Reproducteur",
     "status": "actif",
     "birthDate": "",
-    "pedigree": "",
+    "pedigree": "LOOF n°0512/98765",
     "coat": {
-      "color": "",
+      "color": "Brown rosettes",
       "pattern": "",
       "eyeColor": "",
       "description": ""
     },
-    "description": "Bulle est l'une de nos femelles reproductrices. Fiche à compléter par l'éleveuse (pedigree, n° LOOF, date de naissance, robe, caractère...).",
-    "photos": ["orion-1", "orion-2", "orion-3", "orion-4"]
+    "description": "Maracuja des Terres Sauvages est notre reproducteur mâle, père des portées d'Orion et Freya. Fiche à compléter par l'éleveuse (date de naissance, robe, caractère, distinctions, tests de santé...).",
+    "photos": ["father-orion"]
   }
 ]
