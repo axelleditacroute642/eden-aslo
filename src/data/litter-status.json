@@ -1,6 +1,7 @@
 {
-  "_readme": "Configurable depuis l'admin (onglet Chatons). mode: 'portee' (portée en cours, affiche les fiches), 'gestation' (compte à rebours) ou 'aucune' (affiche les anciens chatons).",
+  "_readme": "Configurable depuis l'admin (onglet Chatons). mode: 'portee' (portée en cours, affiche les fiches), 'gestation' (compte à rebours) ou 'aucune' (affiche les anciens chatons). litterBirthDate: date de mise bas de la portée actuelle, utilisée pour la frise de développement (sevrage) affichée en mode 'portee'.",
   "mode": "portee",
   "gestationDueDate": "",
-  "gestationMessage": "Une nouvelle portée est en préparation !"
+  "gestationMessage": "Une nouvelle portée est en préparation !",
+  "litterBirthDate": ""
 }

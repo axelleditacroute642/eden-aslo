@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import AnimatedSection from "@/components/AnimatedSection";
 import KittenCard from "@/components/KittenCard";
 import GestationCountdown from "@/components/GestationCountdown";
+import LitterDevelopmentTimeline from "@/components/LitterDevelopmentTimeline";
 import { readKittens, readLitterStatus } from "@/lib/store";
 
 export const metadata: Metadata = {
@@ -94,6 +95,12 @@ export default async function ChatonsPage() {
           caractéristiques du pelage, âge, généalogie et prix.
         </p>
       </AnimatedSection>
+
+      {litterStatus.litterBirthDate && (
+        <AnimatedSection delay={0.05} className="mb-10">
+          <LitterDevelopmentTimeline birthDate={litterStatus.litterBirthDate} />
+        </AnimatedSection>
+      )}
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {enCours.map((k, i) => (

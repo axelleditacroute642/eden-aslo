@@ -86,6 +86,29 @@ export default function LitterStatusForm({ status }: { status: LitterStatus }) {
         </div>
       </div>
 
+      <div
+        className={`grid gap-4 sm:grid-cols-2 border-t border-slate-100 pt-4 ${
+          mode === "portee" ? "" : "hidden"
+        }`}
+      >
+        <div>
+          <label className={labelClass} htmlFor="litterBirthDate">
+            Date de mise bas de la portée actuelle
+          </label>
+          <input
+            id="litterBirthDate"
+            name="litterBirthDate"
+            type="date"
+            defaultValue={status.litterBirthDate}
+            className={inputClass}
+          />
+          <p className="mt-1 text-xs text-slate-500">
+            Sert à afficher la frise de développement (sevrage) sur la page
+            publique des chatons disponibles.
+          </p>
+        </div>
+      </div>
+
       <div className="mt-4">
         <SubmitButton pendingLabel="Enregistrement…">Enregistrer le statut</SubmitButton>
       </div>

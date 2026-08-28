@@ -216,6 +216,7 @@ export async function updateLitterStatus(formData: FormData) {
     mode: ["portee", "gestation", "aucune"].includes(mode) ? mode : "portee",
     gestationDueDate: String(formData.get("gestationDueDate") ?? ""),
     gestationMessage: String(formData.get("gestationMessage") ?? ""),
+    litterBirthDate: String(formData.get("litterBirthDate") ?? ""),
   };
 
   await writeLitterStatus(status);

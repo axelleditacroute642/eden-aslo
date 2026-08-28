@@ -46,6 +46,7 @@ export type LitterStatus = {
   mode: "portee" | "gestation" | "aucune";
   gestationDueDate: string;
   gestationMessage: string;
+  litterBirthDate: string;
 };
 
 const redis =
