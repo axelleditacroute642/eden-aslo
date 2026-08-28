@@ -11,34 +11,51 @@ export const metadata: Metadata = {
 export default async function ChatonsPage() {
   const [kittens, litterStatus] = await Promise.all([readKittens(), readLitterStatus()]);
   const order = { disponible: 0, réservé: 1, vendu: 2 } as const;
+  const anciens = [...kittens]
+    .filter((k) => k.status === "vendu")
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   if (litterStatus.mode === "gestation") {
     return (
-      <div className="mx-auto max-w-3xl px-6 py-24 text-center">
-        <AnimatedSection>
-          <h1 className="font-heading text-4xl mb-4">Gestation en cours</h1>
-          {litterStatus.gestationMessage && (
-            <p className="text-eden-ink/70 max-w-xl mx-auto mb-10">
-              {litterStatus.gestationMessage}
+      <div className="mx-auto max-w-6xl px-6 py-16">
+        <div className="max-w-3xl mx-auto text-center py-8">
+          <AnimatedSection>
+            <h1 className="font-heading text-4xl mb-4">Gestation en cours</h1>
+            {litterStatus.gestationMessage && (
+              <p className="text-eden-ink/70 max-w-xl mx-auto mb-10">
+                {litterStatus.gestationMessage}
+              </p>
+            )}
+          </AnimatedSection>
+          <AnimatedSection delay={0.1}>
+            {litterStatus.gestationDueDate ? (
+              <GestationCountdown dueDate={litterStatus.gestationDueDate} />
+            ) : (
+              <p className="text-eden-ink/50">Date prévue à venir.</p>
+            )}
+          </AnimatedSection>
+        </div>
+
+        {anciens.length > 0 && (
+          <AnimatedSection delay={0.15} className="mt-8 pt-12 border-t border-eden-gold/20">
+            <h2 className="font-heading text-2xl mb-2">Anciennes portées</h2>
+            <p className="text-eden-ink/60 text-sm mb-8">
+              En attendant, retrouvez les fiches de nos précédents chatons.
             </p>
-          )}
-        </AnimatedSection>
-        <AnimatedSection delay={0.1}>
-          {litterStatus.gestationDueDate ? (
-            <GestationCountdown dueDate={litterStatus.gestationDueDate} />
-          ) : (
-            <p className="text-eden-ink/50">Date prévue à venir.</p>
-          )}
-        </AnimatedSection>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {anciens.map((k, i) => (
+                <AnimatedSection key={k.id} delay={(i % 3) * 0.08}>
+                  <KittenCard kitten={k} />
+                </AnimatedSection>
+              ))}
+            </div>
+          </AnimatedSection>
+        )}
       </div>
     );
   }
 
   if (litterStatus.mode === "aucune") {
-    const anciens = [...kittens]
-      .filter((k) => k.status === "vendu")
-      .sort((a, b) => a.name.localeCompare(b.name));
-
     return (
       <div className="mx-auto max-w-6xl px-6 py-16">
         <AnimatedSection>
