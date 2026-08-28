@@ -81,8 +81,9 @@ function writeKey(key: string, data: unknown) {
   return redis.set(key, data);
 }
 
-export function readSite(): Promise<SiteData> {
-  return readKey("site.json", siteFallback as SiteData);
+export async function readSite(): Promise<SiteData> {
+  const data = await readKey("site.json", siteFallback as SiteData);
+  return { ...(siteFallback as SiteData), ...data };
 }
 
 export function writeSite(data: SiteData) {
