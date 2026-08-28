@@ -6,23 +6,39 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 import type { Kitten } from "@/lib/kittens";
+import type { LitterStatus } from "@/lib/store";
 
-const NAV_LINKS = [
-  { href: "/", label: "Accueil" },
-  { href: "/chatons", label: "Chatons disponibles" },
-  { href: "/tarifs", label: "Tarifs" },
-  { href: "/galerie", label: "Galerie" },
-  { href: "/documentation", label: "Documentation" },
-  { href: "/contact", label: "Contact" },
-];
+const CHATONS_LABELS: Record<LitterStatus["mode"], string> = {
+  portee: "Chatons disponibles",
+  gestation: "Gestation en cours",
+  aucune: "Anciens chatons",
+};
 
-export default function Navbar({ kittens }: { kittens: Kitten[] }) {
+export default function Navbar({
+  kittens,
+  litterStatus,
+}: {
+  kittens: Kitten[];
+  litterStatus: LitterStatus;
+}) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const available = kittens.filter((k) => k.status === "disponible").slice(0, 4);
+  const NAV_LINKS = [
+    { href: "/", label: "Accueil" },
+    { href: "/chatons", label: CHATONS_LABELS[litterStatus.mode] },
+    { href: "/tarifs", label: "Tarifs" },
+    { href: "/galerie", label: "Galerie" },
+    { href: "/documentation", label: "Documentation" },
+    { href: "/contact", label: "Contact" },
+  ];
+
+  const available =
+    litterStatus.mode === "portee"
+      ? kittens.filter((k) => k.status === "disponible").slice(0, 4)
+      : [];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);

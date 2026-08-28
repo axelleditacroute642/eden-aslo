@@ -3,15 +3,20 @@ import Hero from "@/components/Hero";
 import AnimatedSection from "@/components/AnimatedSection";
 import KittenCard from "@/components/KittenCard";
 import PlaceholderPhoto from "@/components/PlaceholderPhoto";
-import { readSite, readGallery, readKittens } from "@/lib/store";
+import GestationCountdown from "@/components/GestationCountdown";
+import { readSite, readGallery, readKittens, readLitterStatus } from "@/lib/store";
 
 export default async function Home() {
-  const [site, galleryData, kittens] = await Promise.all([
+  const [site, galleryData, kittens, litterStatus] = await Promise.all([
     readSite(),
     readGallery(),
     readKittens(),
+    readLitterStatus(),
   ]);
-  const featured = kittens.filter((k) => k.status === "disponible").slice(0, 3);
+  const featured =
+    litterStatus.mode === "portee"
+      ? kittens.filter((k) => k.status === "disponible").slice(0, 3)
+      : [];
   const galleryPreview = galleryData.slice(0, 4);
 
   return (
@@ -34,6 +39,34 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      {litterStatus.mode === "gestation" && (
+        <section className="mx-auto max-w-3xl px-6 py-16 text-center">
+          <AnimatedSection>
+            <h2 className="font-heading text-3xl mb-3">Gestation en cours</h2>
+            {litterStatus.gestationMessage && (
+              <p className="text-eden-ink/70 max-w-xl mx-auto mb-8">
+                {litterStatus.gestationMessage}
+              </p>
+            )}
+          </AnimatedSection>
+          <AnimatedSection delay={0.1}>
+            {litterStatus.gestationDueDate ? (
+              <GestationCountdown dueDate={litterStatus.gestationDueDate} />
+            ) : (
+              <p className="text-eden-ink/50">Date prévue à venir.</p>
+            )}
+          </AnimatedSection>
+          <AnimatedSection delay={0.15}>
+            <Link
+              href="/chatons"
+              className="inline-block mt-8 text-sm text-eden-rust font-medium hover:translate-x-1 transition-transform"
+            >
+              En savoir plus →
+            </Link>
+          </AnimatedSection>
+        </section>
+      )}
 
       {featured.length > 0 && (
         <section className="mx-auto max-w-6xl px-6 py-16">
