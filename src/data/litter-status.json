@@ -1,0 +1,6 @@
+{
+  "_readme": "Configurable depuis l'admin (onglet Chatons). mode: 'portee' (portée en cours, affiche les fiches), 'gestation' (compte à rebours) ou 'aucune' (affiche les anciens chatons).",
+  "mode": "portee",
+  "gestationDueDate": "",
+  "gestationMessage": "Une nouvelle portée est en préparation !"
+}

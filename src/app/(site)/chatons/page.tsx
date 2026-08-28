@@ -1,16 +1,72 @@
 import type { Metadata } from "next";
 import AnimatedSection from "@/components/AnimatedSection";
 import KittenCard from "@/components/KittenCard";
-import { readKittens } from "@/lib/store";
+import GestationCountdown from "@/components/GestationCountdown";
+import { readKittens, readLitterStatus } from "@/lib/store";
 
 export const metadata: Metadata = {
-  title: "Chatons disponibles — l'Eden d'Aslo",
+  title: "Chatons disponibles — L'Eden d'Aslo",
 };
 
 export default async function ChatonsPage() {
-  const kittens = await readKittens();
+  const [kittens, litterStatus] = await Promise.all([readKittens(), readLitterStatus()]);
   const order = { disponible: 0, réservé: 1, vendu: 2 } as const;
-  const sorted = [...kittens].sort((a, b) => order[a.status] - order[b.status]);
+
+  if (litterStatus.mode === "gestation") {
+    return (
+      <div className="mx-auto max-w-3xl px-6 py-24 text-center">
+        <AnimatedSection>
+          <h1 className="font-heading text-4xl mb-4">Gestation en cours</h1>
+          {litterStatus.gestationMessage && (
+            <p className="text-eden-ink/70 max-w-xl mx-auto mb-10">
+              {litterStatus.gestationMessage}
+            </p>
+          )}
+        </AnimatedSection>
+        <AnimatedSection delay={0.1}>
+          {litterStatus.gestationDueDate ? (
+            <GestationCountdown dueDate={litterStatus.gestationDueDate} />
+          ) : (
+            <p className="text-eden-ink/50">Date prévue à venir.</p>
+          )}
+        </AnimatedSection>
+      </div>
+    );
+  }
+
+  if (litterStatus.mode === "aucune") {
+    const anciens = [...kittens]
+      .filter((k) => k.status === "vendu")
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    return (
+      <div className="mx-auto max-w-6xl px-6 py-16">
+        <AnimatedSection>
+          <h1 className="font-heading text-4xl mb-3">Aucune gestation en cours</h1>
+          <p className="text-eden-ink/70 max-w-2xl mb-10">
+            Il n&apos;y a pas de portée disponible pour le moment. En attendant,
+            découvrez les fiches de nos anciens chatons.
+          </p>
+        </AnimatedSection>
+
+        {anciens.length > 0 ? (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {anciens.map((k, i) => (
+              <AnimatedSection key={k.id} delay={(i % 3) * 0.08}>
+                <KittenCard kitten={k} />
+              </AnimatedSection>
+            ))}
+          </div>
+        ) : (
+          <p className="text-eden-ink/50">Aucun ancien chaton à afficher pour le moment.</p>
+        )}
+      </div>
+    );
+  }
+
+  const enCours = [...kittens]
+    .filter((k) => k.status !== "vendu")
+    .sort((a, b) => order[a.status] - order[b.status]);
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16">
@@ -23,12 +79,15 @@ export default async function ChatonsPage() {
       </AnimatedSection>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {sorted.map((k, i) => (
+        {enCours.map((k, i) => (
           <AnimatedSection key={k.id} delay={(i % 3) * 0.08}>
             <KittenCard kitten={k} />
           </AnimatedSection>
         ))}
       </div>
+      {enCours.length === 0 && (
+        <p className="text-eden-ink/50">Aucun chaton disponible pour le moment.</p>
+      )}
     </div>
   );
 }

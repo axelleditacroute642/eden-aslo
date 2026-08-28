@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import AnimatedSection from "@/components/AnimatedSection";
 import { readSite } from "@/lib/store";
 
-export const metadata: Metadata = { title: "Documentation officielle — l'Eden d'Aslo" };
+export const metadata: Metadata = { title: "Documentation officielle — L'Eden d'Aslo" };
 
 export default async function DocumentationPage() {
   const site = await readSite();

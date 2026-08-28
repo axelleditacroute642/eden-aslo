@@ -14,7 +14,7 @@ export default async function AdminLoginPage({
         className="w-full max-w-sm bg-white rounded-xl shadow-sm border border-slate-200 p-8"
       >
         <h1 className="text-xl font-semibold text-slate-900 mb-1">Espace admin</h1>
-        <p className="text-sm text-slate-500 mb-6">l&apos;Eden d&apos;Aslo</p>
+        <p className="text-sm text-slate-500 mb-6">L&apos;Eden d&apos;Aslo</p>
 
         {error && (
           <p className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md px-3 py-2">

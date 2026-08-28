@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { readKittens, writeKittens } from "@/lib/store";
+import { readKittens, writeKittens, writeLitterStatus, type LitterStatus } from "@/lib/store";
 import { saveUploadedImage, deleteUploadedImage } from "@/lib/uploads";
 import type { Kitten, Parent, Grandparent } from "@/lib/kittens";
 
@@ -206,6 +206,19 @@ export async function deleteKitten(id: string) {
   ]);
 
   await writeKittens(kittens.filter((k) => k.id !== id));
+  revalidatePath("/", "layout");
+  redirect("/admin/chatons");
+}
+
+export async function updateLitterStatus(formData: FormData) {
+  const mode = String(formData.get("mode") ?? "portee") as LitterStatus["mode"];
+  const status: LitterStatus = {
+    mode: ["portee", "gestation", "aucune"].includes(mode) ? mode : "portee",
+    gestationDueDate: String(formData.get("gestationDueDate") ?? ""),
+    gestationMessage: String(formData.get("gestationMessage") ?? ""),
+  };
+
+  await writeLitterStatus(status);
   revalidatePath("/", "layout");
   redirect("/admin/chatons");
 }

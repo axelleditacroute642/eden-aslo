@@ -21,7 +21,7 @@ export default function AdminProtectedLayout({
       <aside className="w-60 shrink-0 bg-slate-900 text-slate-200 flex flex-col">
         <div className="px-5 py-5 border-b border-slate-800">
           <p className="text-sm uppercase tracking-wider text-slate-400">Admin</p>
-          <p className="font-medium">l&apos;Eden d&apos;Aslo</p>
+          <p className="font-medium">L&apos;Eden d&apos;Aslo</p>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1">
           {NAV.map((item) => (

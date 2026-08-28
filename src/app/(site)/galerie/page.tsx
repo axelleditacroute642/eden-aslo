@@ -3,7 +3,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import Gallery, { type Photo } from "@/components/Gallery";
 import { readGallery } from "@/lib/store";
 
-export const metadata: Metadata = { title: "Galerie — l'Eden d'Aslo" };
+export const metadata: Metadata = { title: "Galerie — L'Eden d'Aslo" };
 
 export default async function GaleriePage() {
   const galleryData = await readGallery();

@@ -4,6 +4,7 @@ import type { Photo } from "@/components/Gallery";
 import siteFallback from "@/data/site.json";
 import kittensFallback from "@/data/kittens.json";
 import galleryFallback from "@/data/gallery.json";
+import litterStatusFallback from "@/data/litter-status.json";
 
 export type SiteData = {
   _readme: string;
@@ -39,6 +40,12 @@ export type SiteData = {
       facebook: string;
     };
   };
+};
+
+export type LitterStatus = {
+  mode: "portee" | "gestation" | "aucune";
+  gestationDueDate: string;
+  gestationMessage: string;
 };
 
 const redis =
@@ -89,4 +96,12 @@ export function readGallery(): Promise<Photo[]> {
 
 export function writeGallery(data: Photo[]) {
   return writeKey("gallery.json", data);
+}
+
+export function readLitterStatus(): Promise<LitterStatus> {
+  return readKey("litter-status.json", litterStatusFallback as LitterStatus);
+}
+
+export function writeLitterStatus(data: LitterStatus) {
+  return writeKey("litter-status.json", data);
 }

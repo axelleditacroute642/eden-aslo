@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { readKittens } from "@/lib/store";
+import { readKittens, readLitterStatus } from "@/lib/store";
 import { pageTitleClass, cardClass } from "@/components/admin/ui";
+import LitterStatusForm from "@/components/admin/LitterStatusForm";
 
 const STATUS_STYLES: Record<string, string> = {
   disponible: "bg-emerald-100 text-emerald-700",
@@ -9,7 +10,7 @@ const STATUS_STYLES: Record<string, string> = {
 };
 
 export default async function AdminChatonsPage() {
-  const kittens = await readKittens();
+  const [kittens, litterStatus] = await Promise.all([readKittens(), readLitterStatus()]);
 
   return (
     <div>
@@ -22,6 +23,8 @@ export default async function AdminChatonsPage() {
           + Ajouter un chaton
         </Link>
       </div>
+
+      <LitterStatusForm status={litterStatus} />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {kittens.map((k) => (

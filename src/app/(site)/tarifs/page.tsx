@@ -3,7 +3,7 @@ import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import { readSite } from "@/lib/store";
 
-export const metadata: Metadata = { title: "Tarifs — l'Eden d'Aslo" };
+export const metadata: Metadata = { title: "Tarifs — L'Eden d'Aslo" };
 
 export default async function TarifsPage() {
   const site = await readSite();
