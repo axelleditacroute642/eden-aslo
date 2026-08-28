@@ -8,11 +8,14 @@ import Logo from "./Logo";
 import type { Kitten } from "@/lib/kittens";
 import type { LitterStatus } from "@/lib/store";
 
-const CHATONS_LABELS: Record<LitterStatus["mode"], string> = {
-  portee: "Chatons disponibles",
-  gestation: "Gestation en cours",
-  aucune: "Anciens chatons",
-};
+const NAV_LINKS = [
+  { href: "/", label: "Accueil" },
+  { href: "/chatons", label: "Chatons disponibles" },
+  { href: "/tarifs", label: "Tarifs" },
+  { href: "/galerie", label: "Galerie" },
+  { href: "/documentation", label: "Documentation" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function Navbar({
   kittens,
@@ -26,19 +29,25 @@ export default function Navbar({
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const NAV_LINKS = [
-    { href: "/", label: "Accueil" },
-    { href: "/chatons", label: CHATONS_LABELS[litterStatus.mode] },
-    { href: "/tarifs", label: "Tarifs" },
-    { href: "/galerie", label: "Galerie" },
-    { href: "/documentation", label: "Documentation" },
-    { href: "/contact", label: "Contact" },
-  ];
-
-  const available =
+  const dropdownKittens =
     litterStatus.mode === "portee"
       ? kittens.filter((k) => k.status === "disponible").slice(0, 4)
-      : [];
+      : litterStatus.mode === "aucune"
+        ? [...kittens]
+            .filter((k) => k.status === "vendu")
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .slice(0, 4)
+        : [];
+
+  const dropdownHeader =
+    litterStatus.mode === "portee"
+      ? "Actuellement disponibles"
+      : litterStatus.mode === "aucune"
+        ? "Anciens chatons"
+        : "Gestation en cours";
+
+  const showDropdown =
+    litterStatus.mode === "gestation" || dropdownKittens.length > 0;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -94,7 +103,7 @@ export default function Navbar({
                 </Link>
 
                 <AnimatePresence>
-                  {isChatons && dropdownOpen && available.length > 0 && (
+                  {isChatons && dropdownOpen && showDropdown && (
                     <motion.div
                       initial={{ opacity: 0, y: 8, scale: 0.98 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -104,28 +113,37 @@ export default function Navbar({
                     >
                       <div className="rounded-xl border border-eden-gold/30 bg-eden-cream shadow-xl overflow-hidden">
                         <div className="px-4 py-2 text-[11px] uppercase tracking-widest text-eden-ink/60 bg-eden-cream-soft">
-                          Actuellement disponibles
+                          {dropdownHeader}
                         </div>
-                        <ul>
-                          {available.map((k) => (
-                            <li key={k.id}>
-                              <Link
-                                href={`/chatons/${k.slug}`}
-                                className="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-eden-gold/10 transition-colors"
-                              >
-                                <span>{k.name}</span>
-                                <span className="text-xs text-eden-ink/50">
-                                  {k.sex === "Mâle" ? "♂" : "♀"} · {k.coat.color.split(" ")[0]}
-                                </span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
+                        {litterStatus.mode === "gestation" ? (
+                          <p className="px-4 py-3 text-sm text-eden-ink/70">
+                            {litterStatus.gestationMessage ||
+                              "Une nouvelle portée est en préparation !"}
+                          </p>
+                        ) : (
+                          <ul>
+                            {dropdownKittens.map((k) => (
+                              <li key={k.id}>
+                                <Link
+                                  href={`/chatons/${k.slug}`}
+                                  className="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-eden-gold/10 transition-colors"
+                                >
+                                  <span>{k.name}</span>
+                                  <span className="text-xs text-eden-ink/50">
+                                    {k.sex === "Mâle" ? "♂" : "♀"} · {k.coat.color.split(" ")[0]}
+                                  </span>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                         <Link
                           href="/chatons"
                           className="block px-4 py-2.5 text-sm text-eden-rust font-medium border-t border-eden-gold/20 hover:bg-eden-gold/10 transition-colors"
                         >
-                          Voir tous les chatons →
+                          {litterStatus.mode === "gestation"
+                            ? "En savoir plus →"
+                            : "Voir tous les chatons →"}
                         </Link>
                       </div>
                     </motion.div>
