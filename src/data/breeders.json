@@ -1,0 +1,38 @@
+[
+  {
+    "id": "breeder-nala",
+    "slug": "nala",
+    "name": "Nala de L'Eden d'Aslo",
+    "sex": "Femelle",
+    "role": "Reproductrice",
+    "status": "actif",
+    "birthDate": "2022-03-10",
+    "pedigree": "LOOF n°0512/91023",
+    "coat": {
+      "color": "Brown (marron doré)",
+      "pattern": "Rosettes glitées",
+      "eyeColor": "Vert doré",
+      "description": "Fond chaud, rosettes bien marquées, ventre glitté caractéristique du Bengal."
+    },
+    "description": "Nala est l'une de nos femelles reproductrices, au tempérament doux et joueur. Fiche à compléter par l'éleveuse (caractère, distinctions, tests de santé...).",
+    "photos": ["mother-orion", "gallery-nala-1"]
+  },
+  {
+    "id": "breeder-zola",
+    "slug": "zola",
+    "name": "Zola de L'Eden d'Aslo",
+    "sex": "Femelle",
+    "role": "Reproductrice",
+    "status": "actif",
+    "birthDate": "2021-06-18",
+    "pedigree": "LOOF n°0512/88765",
+    "coat": {
+      "color": "Brown (marron doré)",
+      "pattern": "Rosettes",
+      "eyeColor": "Vert doré",
+      "description": "Silhouette athlétique, robe contrastée aux rosettes bien dessinées."
+    },
+    "description": "Zola est notre seconde femelle reproductrice, réputée pour sa silhouette athlétique. Fiche à compléter par l'éleveuse (caractère, distinctions, tests de santé...).",
+    "photos": ["mother-simba", "gallery-zola-1"]
+  }
+]

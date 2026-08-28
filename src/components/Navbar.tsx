@@ -10,6 +10,8 @@ import type { LitterStatus } from "@/lib/store";
 
 const NAV_LINKS = [
   { href: "/", label: "Accueil" },
+  { href: "/presentation", label: "Présentation" },
+  { href: "/reproducteurs", label: "Reproducteurs" },
   { href: "/chatons", label: "Chatons disponibles" },
   { href: "/tarifs", label: "Tarifs" },
   { href: "/galerie", label: "Galerie" },

@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { readKittens, readGallery } from "@/lib/store";
+import { readKittens, readGallery, readBreeders } from "@/lib/store";
 import { pageTitleClass, cardClass } from "@/components/admin/ui";
 
 const SECTIONS = [
   { href: "/admin/accueil", label: "Accueil", desc: "Texte d'introduction et points forts" },
+  { href: "/admin/presentation", label: "Présentation", desc: "Texte de présentation de la chatterie" },
+  { href: "/admin/reproducteurs", label: "Reproducteurs", desc: "Fiches et photos des chats reproducteurs" },
   { href: "/admin/tarifs", label: "Tarifs", desc: "Fourchette de prix et prestations incluses" },
   { href: "/admin/documentation", label: "Documentation", desc: "Titres, descriptions et fichiers PDF" },
   { href: "/admin/contact", label: "Contact", desc: "Adresse, téléphone, email, réseaux" },
@@ -12,13 +14,18 @@ const SECTIONS = [
 ];
 
 export default async function AdminDashboard() {
-  const [kittens, gallery] = await Promise.all([readKittens(), readGallery()]);
+  const [kittens, gallery, breeders] = await Promise.all([
+    readKittens(),
+    readGallery(),
+    readBreeders(),
+  ]);
 
   return (
     <div>
       <h1 className={pageTitleClass}>Tableau de bord</h1>
       <p className="text-sm text-slate-500 mb-8">
-        {kittens.length} chaton{kittens.length > 1 ? "s" : ""} · {gallery.length} photo
+        {kittens.length} chaton{kittens.length > 1 ? "s" : ""} · {breeders.length} reproducteur
+        {breeders.length > 1 ? "s" : ""} · {gallery.length} photo
         {gallery.length > 1 ? "s" : ""} en galerie
       </p>
 

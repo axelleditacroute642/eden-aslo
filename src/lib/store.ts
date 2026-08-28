@@ -1,10 +1,12 @@
 import { Redis } from "@upstash/redis";
 import type { Kitten } from "@/lib/kittens";
+import type { Breeder } from "@/lib/breeders";
 import type { Photo } from "@/components/Gallery";
 import siteFallback from "@/data/site.json";
 import kittensFallback from "@/data/kittens.json";
 import galleryFallback from "@/data/gallery.json";
 import litterStatusFallback from "@/data/litter-status.json";
+import breedersFallback from "@/data/breeders.json";
 
 export type SiteData = {
   _readme: string;
@@ -12,6 +14,10 @@ export type SiteData = {
     tagline: string;
     intro: string;
     highlights: { title: string; text: string }[];
+  };
+  presentation: {
+    intro: string;
+    paragraphs: string[];
   };
   pricing: {
     intro: string;
@@ -105,4 +111,12 @@ export function readLitterStatus(): Promise<LitterStatus> {
 
 export function writeLitterStatus(data: LitterStatus) {
   return writeKey("litter-status.json", data);
+}
+
+export function readBreeders(): Promise<Breeder[]> {
+  return readKey("breeders.json", breedersFallback as Breeder[]);
+}
+
+export function writeBreeders(data: Breeder[]) {
+  return writeKey("breeders.json", data);
 }

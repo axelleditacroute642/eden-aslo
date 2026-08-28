@@ -4,6 +4,8 @@ import { logout } from "../auth-actions";
 const NAV = [
   { href: "/admin", label: "Tableau de bord" },
   { href: "/admin/accueil", label: "Accueil" },
+  { href: "/admin/presentation", label: "Présentation" },
+  { href: "/admin/reproducteurs", label: "Reproducteurs" },
   { href: "/admin/tarifs", label: "Tarifs" },
   { href: "/admin/documentation", label: "Documentation" },
   { href: "/admin/contact", label: "Contact" },

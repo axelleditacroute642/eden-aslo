@@ -18,6 +18,14 @@
       }
     ]
   },
+  "presentation": {
+    "intro": "L'Eden d'Aslo est une chatterie familiale dédiée à l'élevage du chat Bengal, née de la passion pour cette race sauvage et attachante.",
+    "paragraphs": [
+      "Installée à Saint Priest, notre chatterie élève un nombre restreint de portées par an afin d'offrir à chaque chaton un suivi individuel, dans un cadre familial et chaleureux.",
+      "Nos reproducteurs sont sélectionnés avec soin pour leur tempérament, leur santé et la qualité de leur robe, et sont suivis vétérinairement tout au long de l'année.",
+      "Chaque chaton grandit au sein du foyer, entouré, sociabilisé dès la naissance aux enfants, aux bruits du quotidien et aux autres animaux, pour s'épanouir pleinement dans sa future famille."
+    ]
+  },
   "pricing": {
     "intro": "Le prix d'un chaton L'Eden d'Aslo reflète la qualité du suivi, de la sélection et des soins apportés depuis la naissance jusqu'au départ vers son nouveau foyer.",
     "priceRange": "Entre 1800 € et 2200 € selon la lignée, la robe et le sexe du chaton.",

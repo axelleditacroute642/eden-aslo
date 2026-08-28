@@ -3,6 +3,8 @@ import Logo from "./Logo";
 import { readSite } from "@/lib/store";
 
 const LINKS = [
+  { href: "/presentation", label: "Présentation" },
+  { href: "/reproducteurs", label: "Reproducteurs" },
   { href: "/chatons", label: "Chatons disponibles" },
   { href: "/tarifs", label: "Tarifs" },
   { href: "/galerie", label: "Galerie" },
