@@ -36,21 +36,21 @@
     "photos": ["mother-simba", "gallery-zola-1"]
   },
   {
-    "id": "breeder-maracuja",
-    "slug": "maracuja",
-    "name": "Maracuja des Terres Sauvages",
+    "id": "breeder-s-tit-coeur-de-laf",
+    "slug": "s-tit-coeur-de-laf",
+    "name": "S'tit Coeur de LAF",
     "sex": "Mâle",
     "role": "Reproducteur",
     "status": "actif",
     "birthDate": "",
-    "pedigree": "LOOF n°0512/98765",
+    "pedigree": "LOOF n°2022.19329",
     "coat": {
-      "color": "Brown rosettes",
+      "color": "Brown tabby spotted rosettes",
       "pattern": "",
       "eyeColor": "",
       "description": ""
     },
-    "description": "Maracuja des Terres Sauvages est notre reproducteur mâle, père des portées d'Orion et Freya. Fiche à compléter par l'éleveuse (date de naissance, robe, caractère, distinctions, tests de santé...).",
+    "description": "S'tit Coeur de LAF est notre reproducteur mâle. Fiche à compléter par l'éleveuse (date de naissance, caractère, distinctions, tests de santé...).",
     "photos": ["father-orion"]
   }
 ]
