@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import AnimatedSection from "@/components/AnimatedSection";
 import PhotoCarousel from "@/components/PhotoCarousel";
 import GenealogyTree from "@/components/GenealogyTree";
-import { formatPrice, getAgeLabel, getKittenBySlug } from "@/lib/kittens";
+import { formatBirthDate, formatPrice, getAgeLabel, getKittenBySlug } from "@/lib/kittens";
 import { readSite } from "@/lib/store";
 
 export async function generateMetadata({
@@ -27,6 +27,7 @@ export default async function KittenPage({
   if (!kitten) notFound();
   const { contact } = site;
   const reserverHref = `/reserver?chaton=${encodeURIComponent(kitten.name)}`;
+  const isCurrentLitter = kitten.status !== "vendu";
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
@@ -54,6 +55,15 @@ export default async function KittenPage({
             <h1 className="font-heading text-4xl">{kitten.name}</h1>
             <span className="text-xs uppercase tracking-wider px-2.5 py-1 rounded-full bg-eden-green text-eden-cream">
               {kitten.status}
+            </span>
+            <span
+              className={`text-xs uppercase tracking-wider px-2.5 py-1 rounded-full border ${
+                isCurrentLitter
+                  ? "border-eden-gold/50 text-eden-rust"
+                  : "border-eden-ink/20 text-eden-ink/60"
+              }`}
+            >
+              {isCurrentLitter ? "Portée actuelle" : "Ancienne portée"} · {formatBirthDate(kitten.birthDate)}
             </span>
           </div>
           <p className="mt-1 text-eden-ink/60">

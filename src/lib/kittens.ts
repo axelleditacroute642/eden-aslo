@@ -75,6 +75,14 @@ export function getAgeLabel(birthDate: string): string {
     : `${years} an${years > 1 ? "s" : ""} et ${rem} mois`;
 }
 
+export function formatBirthDate(birthDate: string): string {
+  return new Intl.DateTimeFormat("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(birthDate));
+}
+
 export function formatPrice(price: number, currency: string): string {
   return new Intl.NumberFormat("fr-FR", {
     style: "currency",
