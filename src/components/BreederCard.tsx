@@ -33,7 +33,9 @@ export default function BreederCard({ breeder }: { breeder: Breeder }) {
             </span>
           </div>
           <p className="mt-1 text-sm text-eden-ink/70">
-            {breeder.role} · {breeder.coat.color} · {getAgeLabel(breeder.birthDate)}
+            {[breeder.role, breeder.coat.color, breeder.birthDate ? getAgeLabel(breeder.birthDate) : null]
+              .filter(Boolean)
+              .join(" · ")}
           </p>
           <span className="mt-3 inline-block text-sm text-eden-rust font-medium group-hover:translate-x-1 transition-transform">
             Découvrir sa fiche →

@@ -34,5 +34,23 @@
     },
     "description": "Zola est notre seconde femelle reproductrice, réputée pour sa silhouette athlétique. Fiche à compléter par l'éleveuse (caractère, distinctions, tests de santé...).",
     "photos": ["mother-simba", "gallery-zola-1"]
+  },
+  {
+    "id": "breeder-bulle",
+    "slug": "bulle",
+    "name": "Bulle",
+    "sex": "Femelle",
+    "role": "Reproductrice",
+    "status": "actif",
+    "birthDate": "",
+    "pedigree": "",
+    "coat": {
+      "color": "",
+      "pattern": "",
+      "eyeColor": "",
+      "description": ""
+    },
+    "description": "Bulle est l'une de nos femelles reproductrices. Fiche à compléter par l'éleveuse (pedigree, n° LOOF, date de naissance, robe, caractère...).",
+    "photos": ["orion-1", "orion-2", "orion-3", "orion-4"]
   }
 ]

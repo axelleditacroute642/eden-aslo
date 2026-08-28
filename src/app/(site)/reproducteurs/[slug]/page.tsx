@@ -59,8 +59,14 @@ export default async function BreederPage({
             )}
           </div>
           <p className="mt-1 text-eden-ink/60">
-            {breeder.sex} · {getAgeLabel(breeder.birthDate)} · né(e) le{" "}
-            {formatBirthDate(breeder.birthDate)}
+            {breeder.sex}
+            {breeder.birthDate && (
+              <>
+                {" "}
+                · {getAgeLabel(breeder.birthDate)} · né(e) le{" "}
+                {formatBirthDate(breeder.birthDate)}
+              </>
+            )}
           </p>
 
           <p className="mt-6 leading-relaxed text-eden-ink/80">
