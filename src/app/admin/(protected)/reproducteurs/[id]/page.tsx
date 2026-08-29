@@ -41,7 +41,7 @@ export default async function AdminEditBreederPage({
     <div className="max-w-3xl">
       <h1 className={pageTitleClass}>{breeder.name}</h1>
 
-      <form action={updateBreeder.bind(null, breeder.id)} className="space-y-4">
+      <form id="breeder-form" action={updateBreeder.bind(null, breeder.id)} className="space-y-4">
         <div className={`${cardClass} grid gap-4 sm:grid-cols-2`}>
           <div className="sm:col-span-2">
             <label className={labelClass} htmlFor="name">Nom</label>
@@ -112,8 +112,6 @@ export default async function AdminEditBreederPage({
             <textarea id="description" name="description" defaultValue={breeder.description} rows={4} className={textareaClass} />
           </div>
         </div>
-
-        <SubmitButton pendingLabel="Enregistrement…">Enregistrer</SubmitButton>
       </form>
 
       <div className={`${cardClass} mt-6`}>
@@ -166,6 +164,14 @@ export default async function AdminEditBreederPage({
           </SubmitButton>
         </form>
       </div>
+
+      <button
+        type="submit"
+        form="breeder-form"
+        className="mt-6 rounded-md bg-slate-900 text-white text-sm font-medium px-4 py-2 hover:bg-slate-800 transition-colors"
+      >
+        Enregistrer
+      </button>
 
       <div className={`${cardClass} mt-6 border-red-200`}>
         <p className="text-sm font-semibold text-red-700 mb-2">Zone dangereuse</p>
