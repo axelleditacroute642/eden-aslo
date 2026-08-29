@@ -100,7 +100,7 @@ export async function updateBreeder(id: string, formData: FormData) {
 
   await writeBreeders(breeders);
   revalidatePath("/", "layout");
-  redirect(`/admin/reproducteurs/${id}`);
+  redirect("/admin/reproducteurs");
 }
 
 export async function deleteBreeder(id: string) {
