@@ -54,7 +54,7 @@ export default function GenealogyTree({ kitten }: { kitten: Kitten }) {
 
   return (
     <div className="overflow-x-auto">
-      <div className="min-w-[960px] flex flex-col items-center gap-2 py-4">
+      <div className="flex flex-col items-center gap-2 py-4">
         <div className="flex gap-10 sm:gap-16">
           <div className="flex flex-col items-center gap-2">
             <div className="flex gap-4">
