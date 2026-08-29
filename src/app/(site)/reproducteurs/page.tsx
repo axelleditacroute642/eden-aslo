@@ -57,20 +57,25 @@ export default async function ReproducteursPage() {
         </p>
       </AnimatedSection>
 
+      <AnimatedSection>
+        <h2 className="font-heading text-3xl mb-6">Mes chats</h2>
+      </AnimatedSection>
       <BreederGroup breeders={mine} />
 
-      {external.length > 0 && (
-        <div className="mt-16 pt-10 border-t border-eden-gold/20">
-          <AnimatedSection>
-            <h2 className="font-heading text-3xl mb-3">Saillies externes</h2>
-            <p className="text-eden-ink/70 max-w-2xl mb-10">
-              Chats extérieurs à notre chatterie sollicités pour certaines de
-              nos portées.
-            </p>
-          </AnimatedSection>
+      <div className="mt-16 pt-10 border-t border-eden-gold/20">
+        <AnimatedSection>
+          <h2 className="font-heading text-3xl mb-3">Saillies externes</h2>
+          <p className="text-eden-ink/70 max-w-2xl mb-10">
+            Chats extérieurs à notre chatterie sollicités pour certaines de
+            nos portées.
+          </p>
+        </AnimatedSection>
+        {external.length > 0 ? (
           <BreederGroup breeders={external} />
-        </div>
-      )}
+        ) : (
+          <p className="text-eden-ink/50">Aucune saillie externe pour le moment.</p>
+        )}
+      </div>
     </div>
   );
 }
