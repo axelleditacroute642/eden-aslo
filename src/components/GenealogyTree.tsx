@@ -18,14 +18,14 @@ function PersonNode({
 }) {
   const dims =
     size === "lg"
-      ? "w-32 h-32 sm:w-40 sm:h-40"
+      ? "w-36 h-36 sm:w-44 sm:h-44"
       : size === "md"
-      ? "w-24 h-24 sm:w-32 sm:h-32"
-      : "w-16 h-16 sm:w-20 sm:h-20";
+      ? "w-28 h-28 sm:w-36 sm:h-36"
+      : "w-24 h-24 sm:w-28 sm:h-28";
   const textSize = size === "lg" ? "text-base" : size === "md" ? "text-sm" : "text-xs";
 
   return (
-    <div className="flex flex-col items-center text-center w-32 sm:w-40">
+    <div className="flex flex-col items-center text-center w-36 sm:w-44">
       <PlaceholderPhoto
         seed={photoSeed}
         position={photoPosition}
@@ -54,7 +54,7 @@ export default function GenealogyTree({ kitten }: { kitten: Kitten }) {
 
   return (
     <div className="overflow-x-auto">
-      <div className="min-w-[800px] flex flex-col items-center gap-2 py-4">
+      <div className="min-w-[960px] flex flex-col items-center gap-2 py-4">
         <div className="flex gap-10 sm:gap-16">
           <div className="flex flex-col items-center gap-2">
             <div className="flex gap-4">
