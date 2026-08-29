@@ -26,10 +26,25 @@ const montserrat = Montserrat({
   weight: ["600"],
 });
 
+const title = "L'Eden d'Aslo — Chatterie de Bengals";
+const description =
+  "L'Eden d'Aslo, chatterie de Bengals : chatons disponibles, documentation officielle, galerie et contact.";
+
 export const metadata: Metadata = {
-  title: "L'Eden d'Aslo — Chatterie de Bengals",
-  description:
-    "L'Eden d'Aslo, chatterie de Bengals : chatons disponibles, documentation officielle, galerie et contact.",
+  metadataBase: new URL("https://eden-aslo.vercel.app"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: ["/img/logo-complet-1024.png"],
+  },
+  twitter: {
+    card: "summary",
+    title,
+    description,
+    images: ["/img/logo-complet-1024.png"],
+  },
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
