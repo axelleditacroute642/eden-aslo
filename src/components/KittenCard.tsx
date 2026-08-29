@@ -34,7 +34,11 @@ export default function KittenCard({ kitten }: { kitten: Kitten }) {
           <div className="flex items-baseline justify-between">
             <h3 className="font-heading text-xl">{kitten.name}</h3>
             <span className="text-xs text-eden-ink/50">
-              {kitten.sex === "Mâle" ? "♂ Mâle" : "♀ Femelle"}
+              {kitten.sex === "Mâle"
+                ? "♂ Mâle"
+                : kitten.sex === "Femelle"
+                ? "♀ Femelle"
+                : "Indéterminé"}
             </span>
           </div>
           <p className="mt-1 text-sm text-eden-ink/70">

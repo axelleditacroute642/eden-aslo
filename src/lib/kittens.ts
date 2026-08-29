@@ -25,7 +25,7 @@ export type Kitten = {
   id: string;
   slug: string;
   name: string;
-  sex: "Mâle" | "Femelle";
+  sex: "Mâle" | "Femelle" | "Indéterminé";
   status: "disponible" | "réservé" | "vendu";
   birthDate: string;
   price: number;

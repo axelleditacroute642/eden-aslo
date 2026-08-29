@@ -240,6 +240,24 @@ export async function addKittenPhotos(id: string, formData: FormData) {
   revalidatePath("/", "layout");
 }
 
+export async function moveKittenPhoto(id: string, photoUrl: string, direction: "left" | "right") {
+  const kittens = await readKittens();
+  const index = kittens.findIndex((k) => k.id === id);
+  if (index === -1) return;
+
+  const photos = kittens[index].photos;
+  const photoIndex = photos.indexOf(photoUrl);
+  if (photoIndex === -1) return;
+
+  const targetIndex = direction === "left" ? photoIndex - 1 : photoIndex + 1;
+  if (targetIndex < 0 || targetIndex >= photos.length) return;
+
+  [photos[photoIndex], photos[targetIndex]] = [photos[targetIndex], photos[photoIndex]];
+
+  await writeKittens(kittens);
+  revalidatePath("/", "layout");
+}
+
 export async function removeKittenPhoto(id: string, photoUrl: string) {
   const kittens = await readKittens();
   const index = kittens.findIndex((k) => k.id === id);

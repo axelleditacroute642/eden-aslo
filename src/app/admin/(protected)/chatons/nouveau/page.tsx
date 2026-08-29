@@ -22,6 +22,7 @@ export default function AdminNewKittenPage() {
           <select id="sex" name="sex" className={inputClass} defaultValue="Mâle">
             <option value="Mâle">Mâle</option>
             <option value="Femelle">Femelle</option>
+            <option value="Indéterminé">Indéterminé</option>
           </select>
         </div>
 

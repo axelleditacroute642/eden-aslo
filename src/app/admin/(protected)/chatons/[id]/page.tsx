@@ -6,6 +6,7 @@ import {
   deleteKitten,
   addKittenPhotos,
   removeKittenPhoto,
+  moveKittenPhoto,
 } from "../actions";
 import SubmitButton from "@/components/admin/SubmitButton";
 import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
@@ -148,6 +149,7 @@ export default async function AdminEditKittenPage({
             <select id="sex" name="sex" defaultValue={kitten.sex} className={inputClass}>
               <option value="Mâle">Mâle</option>
               <option value="Femelle">Femelle</option>
+              <option value="Indéterminé">Indéterminé</option>
             </select>
           </div>
 
@@ -210,9 +212,31 @@ export default async function AdminEditKittenPage({
       <div className={`${cardClass} mt-6`}>
         <p className={sectionTitleClass}>Photos du chaton</p>
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-4">
-          {kitten.photos.map((photo) => (
+          {kitten.photos.map((photo, i) => (
             <div key={photo} className="space-y-1.5">
               <PlaceholderPhoto seed={photo} rounded="rounded-md" className="aspect-square" />
+              <div className="flex gap-1">
+                <form action={moveKittenPhoto.bind(null, kitten.id, photo, "left")} className="flex-1">
+                  <button
+                    type="submit"
+                    disabled={i === 0}
+                    aria-label="Déplacer avant"
+                    className="w-full text-xs rounded-md border border-slate-200 px-2 py-1 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    ←
+                  </button>
+                </form>
+                <form action={moveKittenPhoto.bind(null, kitten.id, photo, "right")} className="flex-1">
+                  <button
+                    type="submit"
+                    disabled={i === kitten.photos.length - 1}
+                    aria-label="Déplacer après"
+                    className="w-full text-xs rounded-md border border-slate-200 px-2 py-1 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    →
+                  </button>
+                </form>
+              </div>
               <form action={removeKittenPhoto.bind(null, kitten.id, photo)}>
                 <ConfirmDeleteButton
                   label="Supprimer"
