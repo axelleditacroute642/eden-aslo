@@ -37,13 +37,11 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: ["/img/logo-complet-1024.png"],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title,
     description,
-    images: ["/img/logo-complet-1024.png"],
   },
 };
 
