@@ -30,7 +30,7 @@ function PersonNode({
         seed={photoSeed}
         position={photoPosition}
         rounded="rounded-full"
-        className={`${dims} ring-2 ${highlight ? "ring-eden-gold" : "ring-eden-gold/30"}`}
+        className={`${dims} ring-2 ${highlight ? "ring-eden-gold" : "ring-eden-gold/30"} relative transition-transform duration-300 ease-out hover:z-10 hover:scale-150 cursor-zoom-in`}
       />
       <span className={`mt-2 font-heading ${textSize} leading-tight`}>{name}</span>
       {subtitle && (
