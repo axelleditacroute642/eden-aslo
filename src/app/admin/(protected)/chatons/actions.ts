@@ -183,7 +183,7 @@ export async function updateKitten(id: string, formData: FormData) {
 
   await writeKittens(kittens);
   revalidatePath("/", "layout");
-  redirect(`/admin/chatons/${id}`);
+  redirect("/admin/chatons");
 }
 
 export async function deleteKitten(id: string) {
