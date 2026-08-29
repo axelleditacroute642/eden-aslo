@@ -8,6 +8,7 @@ export type Breeder = {
   sex: "Mâle" | "Femelle";
   role: "Reproductrice" | "Reproducteur";
   status: "actif" | "retraité";
+  ownership: "maison" | "externe";
   birthDate: string;
   pedigree: string;
   coat: {

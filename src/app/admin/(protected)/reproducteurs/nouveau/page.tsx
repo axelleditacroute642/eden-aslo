@@ -42,6 +42,14 @@ export default function AdminNewBreederPage() {
         </div>
 
         <div>
+          <label className={labelClass} htmlFor="ownership">Propriétaire</label>
+          <select id="ownership" name="ownership" className={inputClass} defaultValue="maison">
+            <option value="maison">Mon chat</option>
+            <option value="externe">Saillie externe</option>
+          </select>
+        </div>
+
+        <div>
           <label className={labelClass} htmlFor="birthDate">Date de naissance</label>
           <input id="birthDate" name="birthDate" type="date" className={inputClass} />
         </div>

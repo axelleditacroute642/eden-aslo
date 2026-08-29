@@ -51,6 +51,7 @@ export async function addBreeder(formData: FormData) {
     sex: String(formData.get("sex") ?? "Femelle") as Breeder["sex"],
     role: String(formData.get("role") ?? "Reproductrice") as Breeder["role"],
     status: String(formData.get("status") ?? "actif") as Breeder["status"],
+    ownership: String(formData.get("ownership") ?? "maison") as Breeder["ownership"],
     birthDate: String(formData.get("birthDate") ?? ""),
     pedigree: String(formData.get("pedigree") ?? ""),
     coat: {
@@ -87,6 +88,7 @@ export async function updateBreeder(id: string, formData: FormData) {
     sex: String(formData.get("sex") ?? existing.sex) as Breeder["sex"],
     role: String(formData.get("role") ?? existing.role) as Breeder["role"],
     status: String(formData.get("status") ?? existing.status) as Breeder["status"],
+    ownership: String(formData.get("ownership") ?? existing.ownership ?? "maison") as Breeder["ownership"],
     birthDate: String(formData.get("birthDate") ?? existing.birthDate),
     pedigree: String(formData.get("pedigree") ?? existing.pedigree),
     coat: {

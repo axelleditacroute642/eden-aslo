@@ -1,14 +1,40 @@
 import Link from "next/link";
 import { readBreeders } from "@/lib/store";
-import { pageTitleClass, cardClass } from "@/components/admin/ui";
+import type { Breeder } from "@/lib/breeders";
+import { pageTitleClass, cardClass, sectionTitleClass } from "@/components/admin/ui";
 
 const STATUS_STYLES: Record<string, string> = {
   actif: "bg-emerald-100 text-emerald-700",
   "retraité": "bg-slate-200 text-slate-600",
 };
 
+function BreederGrid({ breeders }: { breeders: Breeder[] }) {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {breeders.map((b) => (
+        <Link key={b.id} href={`/admin/reproducteurs/${b.id}`} className={`${cardClass} hover:border-slate-400 hover:shadow-sm transition-all block`}>
+          <div className="flex items-center justify-between mb-2">
+            <p className="font-semibold text-slate-900">{b.name}</p>
+            <span className={`text-xs px-2 py-0.5 rounded-full ${STATUS_STYLES[b.status] ?? "bg-slate-100 text-slate-600"}`}>
+              {b.status}
+            </span>
+          </div>
+          <p className="text-sm text-slate-500">
+            {b.role} · {b.coat.color} · {b.photos.length} photo{b.photos.length > 1 ? "s" : ""}
+          </p>
+        </Link>
+      ))}
+      {breeders.length === 0 && (
+        <p className="text-sm text-slate-400">Aucun reproducteur dans cette catégorie.</p>
+      )}
+    </div>
+  );
+}
+
 export default async function AdminReproducteursPage() {
   const breeders = await readBreeders();
+  const mine = breeders.filter((b) => (b.ownership ?? "maison") === "maison");
+  const external = breeders.filter((b) => b.ownership === "externe");
 
   return (
     <div>
@@ -22,24 +48,15 @@ export default async function AdminReproducteursPage() {
         </Link>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {breeders.map((b) => (
-          <Link key={b.id} href={`/admin/reproducteurs/${b.id}`} className={`${cardClass} hover:border-slate-400 hover:shadow-sm transition-all block`}>
-            <div className="flex items-center justify-between mb-2">
-              <p className="font-semibold text-slate-900">{b.name}</p>
-              <span className={`text-xs px-2 py-0.5 rounded-full ${STATUS_STYLES[b.status] ?? "bg-slate-100 text-slate-600"}`}>
-                {b.status}
-              </span>
-            </div>
-            <p className="text-sm text-slate-500">
-              {b.role} · {b.coat.color} · {b.photos.length} photo{b.photos.length > 1 ? "s" : ""}
-            </p>
-          </Link>
-        ))}
-        {breeders.length === 0 && (
-          <p className="text-sm text-slate-400">Aucun reproducteur pour le moment.</p>
-        )}
-      </div>
+      <section className="mb-10">
+        <h2 className={sectionTitleClass}>Mes chats</h2>
+        <BreederGrid breeders={mine} />
+      </section>
+
+      <section>
+        <h2 className={sectionTitleClass}>Saillies externes</h2>
+        <BreederGrid breeders={external} />
+      </section>
     </div>
   );
 }

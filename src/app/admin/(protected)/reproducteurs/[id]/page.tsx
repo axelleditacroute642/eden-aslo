@@ -78,6 +78,14 @@ export default async function AdminEditBreederPage({
           </div>
 
           <div>
+            <label className={labelClass} htmlFor="ownership">Propriétaire</label>
+            <select id="ownership" name="ownership" defaultValue={breeder.ownership ?? "maison"} className={inputClass}>
+              <option value="maison">Mon chat</option>
+              <option value="externe">Saillie externe</option>
+            </select>
+          </div>
+
+          <div>
             <label className={labelClass} htmlFor="birthDate">Date de naissance</label>
             <input id="birthDate" name="birthDate" type="date" defaultValue={breeder.birthDate} className={inputClass} />
           </div>

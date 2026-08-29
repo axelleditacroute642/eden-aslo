@@ -6,6 +6,7 @@
     "sex": "Femelle",
     "role": "Reproductrice",
     "status": "actif",
+    "ownership": "maison",
     "birthDate": "",
     "pedigree": "LOOF n°2025.19362",
     "coat": {
@@ -24,6 +25,7 @@
     "sex": "Mâle",
     "role": "Reproducteur",
     "status": "actif",
+    "ownership": "maison",
     "birthDate": "",
     "pedigree": "LOOF n°2022.19329",
     "coat": {

@@ -58,6 +58,11 @@ export default async function BreederPage({
                 Retraité(e)
               </span>
             )}
+            {breeder.ownership === "externe" && (
+              <span className="text-xs uppercase tracking-wider px-2.5 py-1 rounded-full border border-eden-ink/20 text-eden-ink/60">
+                Saillie externe
+              </span>
+            )}
           </div>
           <p className="mt-1 text-eden-ink/60">
             {breeder.sex}
