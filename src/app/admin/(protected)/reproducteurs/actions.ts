@@ -131,6 +131,29 @@ export async function addBreederPhotos(id: string, formData: FormData) {
   revalidatePath("/", "layout");
 }
 
+export async function updateBreederPhotoPosition(id: string, photoUrl: string, formData: FormData) {
+  const breeders = await readBreeders();
+  const index = breeders.findIndex((b) => b.id === id);
+  if (index === -1) return;
+
+  const x = Number(formData.get("photo-posX"));
+  const y = Number(formData.get("photo-posY"));
+  if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+  const zoom = Number(formData.get("photo-posZoom"));
+
+  breeders[index].photoPositions = {
+    ...breeders[index].photoPositions,
+    [photoUrl]: {
+      x: Math.min(100, Math.max(0, Math.round(x))),
+      y: Math.min(100, Math.max(0, Math.round(y))),
+      zoom: Number.isFinite(zoom) ? Math.min(3, Math.max(1, zoom)) : 1,
+    },
+  };
+
+  await writeBreeders(breeders);
+  revalidatePath("/", "layout");
+}
+
 export async function removeBreederPhoto(id: string, photoUrl: string) {
   const breeders = await readBreeders();
   const index = breeders.findIndex((b) => b.id === id);
@@ -138,6 +161,9 @@ export async function removeBreederPhoto(id: string, photoUrl: string) {
   if (breeders[index].photos.length <= 1) return;
 
   breeders[index].photos = breeders[index].photos.filter((p) => p !== photoUrl);
+  if (breeders[index].photoPositions) {
+    delete breeders[index].photoPositions[photoUrl];
+  }
   await writeBreeders(breeders);
   await deleteUploadedImage(photoUrl);
   revalidatePath("/", "layout");

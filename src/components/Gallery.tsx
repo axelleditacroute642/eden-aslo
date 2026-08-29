@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import PlaceholderPhoto from "./PlaceholderPhoto";
+import type { PhotoPosition } from "@/lib/photo";
 
 export type Photo = {
   id: string;
@@ -10,7 +11,7 @@ export type Photo = {
   caption: string;
   category: "actuel" | "ancien";
   type: "chat" | "chaton";
-  position?: { x: number; y: number };
+  position?: PhotoPosition;
 };
 
 const FILTERS = [

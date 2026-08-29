@@ -43,9 +43,11 @@ function readPhotoPosition(formData: FormData, prefix: string) {
   const x = Number(formData.get(`${prefix}-posX`));
   const y = Number(formData.get(`${prefix}-posY`));
   if (!Number.isFinite(x) || !Number.isFinite(y)) return undefined;
+  const zoom = Number(formData.get(`${prefix}-posZoom`));
   return {
     x: Math.min(100, Math.max(0, Math.round(x))),
     y: Math.min(100, Math.max(0, Math.round(y))),
+    zoom: Number.isFinite(zoom) ? Math.min(3, Math.max(1, zoom)) : 1,
   };
 }
 
@@ -258,6 +260,23 @@ export async function moveKittenPhoto(id: string, photoUrl: string, direction: "
   revalidatePath("/", "layout");
 }
 
+export async function updateKittenPhotoPosition(id: string, photoUrl: string, formData: FormData) {
+  const kittens = await readKittens();
+  const index = kittens.findIndex((k) => k.id === id);
+  if (index === -1) return;
+
+  const position = readPhotoPosition(formData, "photo");
+  if (!position) return;
+
+  kittens[index].photoPositions = {
+    ...kittens[index].photoPositions,
+    [photoUrl]: position,
+  };
+
+  await writeKittens(kittens);
+  revalidatePath("/", "layout");
+}
+
 export async function removeKittenPhoto(id: string, photoUrl: string) {
   const kittens = await readKittens();
   const index = kittens.findIndex((k) => k.id === id);
@@ -265,6 +284,9 @@ export async function removeKittenPhoto(id: string, photoUrl: string) {
   if (kittens[index].photos.length <= 1) return;
 
   kittens[index].photos = kittens[index].photos.filter((p) => p !== photoUrl);
+  if (kittens[index].photoPositions) {
+    delete kittens[index].photoPositions[photoUrl];
+  }
   await writeKittens(kittens);
   await deleteUploadedImage(photoUrl);
   revalidatePath("/", "layout");

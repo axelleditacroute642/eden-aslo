@@ -1,6 +1,7 @@
 import { readKittens } from "@/lib/store";
+import type { PhotoPosition } from "@/lib/photo";
 
-export type PhotoPosition = { x: number; y: number };
+export type { PhotoPosition };
 
 export type Grandparent = {
   name: string;
@@ -38,6 +39,7 @@ export type Kitten = {
   };
   description: string;
   photos: string[];
+  photoPositions?: Record<string, PhotoPosition>;
   parents: {
     father: Parent;
     mother: Parent;

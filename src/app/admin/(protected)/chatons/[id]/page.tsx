@@ -7,11 +7,12 @@ import {
   addKittenPhotos,
   removeKittenPhoto,
   moveKittenPhoto,
+  updateKittenPhotoPosition,
 } from "../actions";
 import SubmitButton from "@/components/admin/SubmitButton";
 import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
 import PlaceholderPhoto from "@/components/PlaceholderPhoto";
-import FocalPointPicker from "@/components/admin/FocalPointPicker";
+import PhotoPositionEditor from "@/components/admin/PhotoPositionEditor";
 import {
   pageTitleClass,
   cardClass,
@@ -58,12 +59,16 @@ function GrandparentFields({
       />
       <input type="file" name={`${prefix}-photo`} accept="image/*" className={fileInputClass} />
       {isRealPhoto(gp.photoSeed) && (
-        <FocalPointPicker
+        <PhotoPositionEditor
           src={gp.photoSeed}
           nameX={`${prefix}-posX`}
           nameY={`${prefix}-posY`}
+          nameZoom={`${prefix}-posZoom`}
           defaultX={gp.photoPosition?.x ?? 50}
           defaultY={gp.photoPosition?.y ?? 50}
+          defaultZoom={gp.photoPosition?.zoom ?? 1}
+          shape="circle"
+          className="max-w-32"
         />
       )}
     </div>
@@ -101,12 +106,16 @@ function ParentFields({
       />
       <input type="file" name={`${prefix}-photo`} accept="image/*" className={fileInputClass} />
       {isRealPhoto(parent.photoSeed) && (
-        <FocalPointPicker
+        <PhotoPositionEditor
           src={parent.photoSeed}
           nameX={`${prefix}-posX`}
           nameY={`${prefix}-posY`}
+          nameZoom={`${prefix}-posZoom`}
           defaultX={parent.photoPosition?.x ?? 50}
           defaultY={parent.photoPosition?.y ?? 50}
+          defaultZoom={parent.photoPosition?.zoom ?? 1}
+          shape="circle"
+          className="max-w-40"
         />
       )}
 
@@ -210,41 +219,65 @@ export default async function AdminEditKittenPage({
 
       <div className={`${cardClass} mt-6`}>
         <p className={sectionTitleClass}>Photos du chaton</p>
-        <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-4">
-          {kitten.photos.map((photo, i) => (
-            <div key={photo} className="space-y-1.5">
-              <PlaceholderPhoto seed={photo} rounded="rounded-md" className="aspect-square" />
-              <div className="flex gap-1">
-                <form action={moveKittenPhoto.bind(null, kitten.id, photo, "left")} className="flex-1">
-                  <button
-                    type="submit"
-                    disabled={i === 0}
-                    aria-label="Déplacer avant"
-                    className="w-full text-xs rounded-md border border-slate-200 px-2 py-1 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed"
-                  >
-                    ←
-                  </button>
-                </form>
-                <form action={moveKittenPhoto.bind(null, kitten.id, photo, "right")} className="flex-1">
-                  <button
-                    type="submit"
-                    disabled={i === kitten.photos.length - 1}
-                    aria-label="Déplacer après"
-                    className="w-full text-xs rounded-md border border-slate-200 px-2 py-1 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed"
-                  >
-                    →
-                  </button>
-                </form>
+        <div className="grid gap-4 sm:grid-cols-2 mb-4">
+          {kitten.photos.map((photo, i) => {
+            const pos = kitten.photoPositions?.[photo];
+            return (
+              <div key={photo} className="rounded-lg border border-slate-200 p-3 space-y-3">
+                {isRealPhoto(photo) ? (
+                  <form action={updateKittenPhotoPosition.bind(null, kitten.id, photo)} className="space-y-2">
+                    <PhotoPositionEditor
+                      src={photo}
+                      nameX="photo-posX"
+                      nameY="photo-posY"
+                      nameZoom="photo-posZoom"
+                      defaultX={pos?.x ?? 50}
+                      defaultY={pos?.y ?? 50}
+                      defaultZoom={pos?.zoom ?? 1}
+                      aspect="4 / 3"
+                    />
+                    <SubmitButton
+                      className="text-xs rounded-md border border-slate-300 px-3 py-1.5 hover:bg-slate-50"
+                      pendingLabel="…"
+                    >
+                      Enregistrer le cadrage
+                    </SubmitButton>
+                  </form>
+                ) : (
+                  <PlaceholderPhoto seed={photo} rounded="rounded-md" className="aspect-[4/3]" />
+                )}
+                <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-100">
+                  <form action={moveKittenPhoto.bind(null, kitten.id, photo, "left")}>
+                    <button
+                      type="submit"
+                      disabled={i === 0}
+                      aria-label="Déplacer avant"
+                      className="text-xs rounded-md border border-slate-200 px-2 py-1 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed"
+                    >
+                      ←
+                    </button>
+                  </form>
+                  <form action={moveKittenPhoto.bind(null, kitten.id, photo, "right")}>
+                    <button
+                      type="submit"
+                      disabled={i === kitten.photos.length - 1}
+                      aria-label="Déplacer après"
+                      className="text-xs rounded-md border border-slate-200 px-2 py-1 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed"
+                    >
+                      →
+                    </button>
+                  </form>
+                  <form action={removeKittenPhoto.bind(null, kitten.id, photo)} className="ml-auto">
+                    <ConfirmDeleteButton
+                      label="Supprimer"
+                      confirmLabel="Confirmer ?"
+                      className="text-xs rounded-md border border-red-200 text-red-600 px-2 py-1 hover:bg-red-50"
+                    />
+                  </form>
+                </div>
               </div>
-              <form action={removeKittenPhoto.bind(null, kitten.id, photo)}>
-                <ConfirmDeleteButton
-                  label="Supprimer"
-                  confirmLabel="Confirmer ?"
-                  className="w-full text-xs rounded-md border border-red-200 text-red-600 px-2 py-1 hover:bg-red-50"
-                />
-              </form>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <form action={addKittenPhotos.bind(null, kitten.id)} className="flex flex-wrap items-center gap-3">
           <input type="file" name="photos" accept="image/*" multiple className={fileInputClass} />

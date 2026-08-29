@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { PhotoPosition } from "@/lib/photo";
 
 function hashSeed(seed: string) {
   let h = 0;
@@ -29,9 +30,10 @@ export default function PlaceholderPhoto({
   label?: string;
   className?: string;
   rounded?: string;
-  position?: { x: number; y: number };
+  position?: PhotoPosition;
 }) {
   if (seed?.startsWith("/uploads/") || seed?.startsWith("http")) {
+    const zoom = position?.zoom ?? 1;
     return (
       <div className={`relative overflow-hidden ${rounded} ${className}`}>
         <Image
@@ -41,7 +43,13 @@ export default function PlaceholderPhoto({
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover"
           style={
-            position ? { objectPosition: `${position.x}% ${position.y}%` } : undefined
+            position
+              ? {
+                  objectPosition: `${position.x}% ${position.y}%`,
+                  transform: zoom !== 1 ? `scale(${zoom})` : undefined,
+                  transformOrigin: `${position.x}% ${position.y}%`,
+                }
+              : undefined
           }
         />
         {label && (

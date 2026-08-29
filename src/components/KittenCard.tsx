@@ -23,7 +23,12 @@ export default function KittenCard({ kitten }: { kitten: Kitten }) {
         className="block rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-300 border border-eden-gold/15"
       >
         <div className="relative">
-          <PhotoCarousel photos={kitten.photos} label={kitten.name} rounded="" />
+          <PhotoCarousel
+            photos={kitten.photos}
+            positions={kitten.photoPositions}
+            label={kitten.name}
+            rounded=""
+          />
           <span
             className={`absolute top-3 left-3 text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow ${STATUS_STYLES[kitten.status]}`}
           >

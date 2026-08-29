@@ -44,6 +44,7 @@ export default async function KittenPage({
         <AnimatedSection>
           <PhotoCarousel
             photos={kitten.photos}
+            positions={kitten.photoPositions}
             label={kitten.name}
             aspect="aspect-square"
             className="shadow-lg"

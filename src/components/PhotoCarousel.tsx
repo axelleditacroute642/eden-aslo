@@ -3,15 +3,18 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import PlaceholderPhoto from "./PlaceholderPhoto";
+import type { PhotoPosition } from "@/lib/photo";
 
 export default function PhotoCarousel({
   photos,
+  positions,
   label,
   className = "",
   rounded = "rounded-xl",
   aspect = "aspect-[4/3]",
 }: {
   photos: string[];
+  positions?: Record<string, PhotoPosition>;
   label?: string;
   className?: string;
   rounded?: string;
@@ -40,6 +43,7 @@ export default function PhotoCarousel({
         >
           <PlaceholderPhoto
             seed={photos[index]}
+            position={positions?.[photos[index]]}
             label={label}
             className="w-full h-full"
             rounded=""

@@ -5,10 +5,12 @@ import {
   deleteBreeder,
   addBreederPhotos,
   removeBreederPhoto,
+  updateBreederPhotoPosition,
 } from "../actions";
 import SubmitButton from "@/components/admin/SubmitButton";
 import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
 import PlaceholderPhoto from "@/components/PlaceholderPhoto";
+import PhotoPositionEditor from "@/components/admin/PhotoPositionEditor";
 import {
   pageTitleClass,
   cardClass,
@@ -20,6 +22,10 @@ import {
 
 const fileInputClass =
   "block w-full text-xs text-slate-600 file:mr-2 file:rounded-md file:border-0 file:bg-slate-100 file:px-2 file:py-1 file:text-xs file:font-medium hover:file:bg-slate-200";
+
+function isRealPhoto(seed: string): boolean {
+  return seed?.startsWith("/uploads/") || seed?.startsWith("http");
+}
 
 export default async function AdminEditBreederPage({
   params,
@@ -112,19 +118,43 @@ export default async function AdminEditBreederPage({
 
       <div className={`${cardClass} mt-6`}>
         <p className={sectionTitleClass}>Photos</p>
-        <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-4">
-          {breeder.photos.map((photo) => (
-            <div key={photo} className="space-y-1.5">
-              <PlaceholderPhoto seed={photo} rounded="rounded-md" className="aspect-square" />
-              <form action={removeBreederPhoto.bind(null, breeder.id, photo)}>
-                <ConfirmDeleteButton
-                  label="Supprimer"
-                  confirmLabel="Confirmer ?"
-                  className="w-full text-xs rounded-md border border-red-200 text-red-600 px-2 py-1 hover:bg-red-50"
-                />
-              </form>
-            </div>
-          ))}
+        <div className="grid gap-4 sm:grid-cols-2 mb-4">
+          {breeder.photos.map((photo) => {
+            const pos = breeder.photoPositions?.[photo];
+            return (
+              <div key={photo} className="rounded-lg border border-slate-200 p-3 space-y-3">
+                {isRealPhoto(photo) ? (
+                  <form action={updateBreederPhotoPosition.bind(null, breeder.id, photo)} className="space-y-2">
+                    <PhotoPositionEditor
+                      src={photo}
+                      nameX="photo-posX"
+                      nameY="photo-posY"
+                      nameZoom="photo-posZoom"
+                      defaultX={pos?.x ?? 50}
+                      defaultY={pos?.y ?? 50}
+                      defaultZoom={pos?.zoom ?? 1}
+                      aspect="4 / 3"
+                    />
+                    <SubmitButton
+                      className="text-xs rounded-md border border-slate-300 px-3 py-1.5 hover:bg-slate-50"
+                      pendingLabel="…"
+                    >
+                      Enregistrer le cadrage
+                    </SubmitButton>
+                  </form>
+                ) : (
+                  <PlaceholderPhoto seed={photo} rounded="rounded-md" className="aspect-[4/3]" />
+                )}
+                <form action={removeBreederPhoto.bind(null, breeder.id, photo)} className="pt-1 border-t border-slate-100">
+                  <ConfirmDeleteButton
+                    label="Supprimer"
+                    confirmLabel="Confirmer ?"
+                    className="text-xs rounded-md border border-red-200 text-red-600 px-2 py-1 hover:bg-red-50"
+                  />
+                </form>
+              </div>
+            );
+          })}
         </div>
         <form action={addBreederPhotos.bind(null, breeder.id)} className="flex flex-wrap items-center gap-3">
           <input type="file" name="photos" accept="image/*" multiple className={fileInputClass} />

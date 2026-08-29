@@ -8,9 +8,11 @@ function readPhotoPosition(formData: FormData) {
   const x = Number(formData.get("posX"));
   const y = Number(formData.get("posY"));
   if (!Number.isFinite(x) || !Number.isFinite(y)) return undefined;
+  const zoom = Number(formData.get("posZoom"));
   return {
     x: Math.min(100, Math.max(0, Math.round(x))),
     y: Math.min(100, Math.max(0, Math.round(y))),
+    zoom: Number.isFinite(zoom) ? Math.min(3, Math.max(1, zoom)) : 1,
   };
 }
 

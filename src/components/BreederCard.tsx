@@ -18,7 +18,12 @@ export default function BreederCard({ breeder }: { breeder: Breeder }) {
         className="block rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-300 border border-eden-gold/15"
       >
         <div className="relative">
-          <PhotoCarousel photos={breeder.photos} label={breeder.name} rounded="" />
+          <PhotoCarousel
+            photos={breeder.photos}
+            positions={breeder.photoPositions}
+            label={breeder.name}
+            rounded=""
+          />
           {breeder.status === "retraité" && (
             <span className="absolute top-3 left-3 text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow bg-eden-ink/60 text-eden-cream">
               Retraité(e)

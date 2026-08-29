@@ -40,6 +40,7 @@ export default async function BreederPage({
         <AnimatedSection>
           <PhotoCarousel
             photos={breeder.photos}
+            positions={breeder.photoPositions}
             label={breeder.name}
             aspect="aspect-square"
             className="shadow-lg"
