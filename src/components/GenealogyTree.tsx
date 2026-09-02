@@ -18,14 +18,16 @@ function PersonNode({
 }) {
   const dims =
     size === "lg"
-      ? "w-36 h-36 sm:w-44 sm:h-44"
+      ? "w-24 h-24 sm:w-44 sm:h-44"
       : size === "md"
-      ? "w-28 h-28 sm:w-36 sm:h-36"
-      : "w-24 h-24 sm:w-28 sm:h-28";
-  const textSize = size === "lg" ? "text-base" : size === "md" ? "text-sm" : "text-xs";
+      ? "w-20 h-20 sm:w-36 sm:h-36"
+      : "w-16 h-16 sm:w-28 sm:h-28";
+  const outerWidth =
+    size === "lg" ? "w-28 sm:w-44" : size === "md" ? "w-24 sm:w-36" : "w-20 sm:w-28";
+  const textSize = size === "lg" ? "text-sm sm:text-base" : size === "md" ? "text-xs sm:text-sm" : "text-[11px] sm:text-xs";
 
   return (
-    <div className="flex flex-col items-center text-center w-36 sm:w-44">
+    <div className={`flex flex-col items-center text-center ${outerWidth}`}>
       <PlaceholderPhoto
         seed={photoSeed}
         position={photoPosition}
@@ -54,10 +56,10 @@ export default function GenealogyTree({ kitten }: { kitten: Kitten }) {
 
   return (
     <div className="overflow-x-auto">
-      <div className="flex flex-col items-center gap-2 py-4">
-        <div className="flex gap-10 sm:gap-16">
+      <div className="flex flex-col items-center gap-6 sm:gap-2 py-4 min-w-fit mx-auto">
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-16">
           <div className="flex flex-col items-center gap-2">
-            <div className="flex gap-4">
+            <div className="flex gap-2 sm:gap-4">
               <PersonNode
                 name={father.parents.father.name}
                 photoSeed={father.parents.father.photoSeed}
@@ -84,7 +86,7 @@ export default function GenealogyTree({ kitten }: { kitten: Kitten }) {
           </div>
 
           <div className="flex flex-col items-center gap-2">
-            <div className="flex gap-4">
+            <div className="flex gap-2 sm:gap-4">
               <PersonNode
                 name={mother.parents.father.name}
                 photoSeed={mother.parents.father.photoSeed}
