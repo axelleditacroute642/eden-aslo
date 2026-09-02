@@ -65,7 +65,6 @@ export default async function Footer() {
               {site.contact.address ? `${site.contact.address}, ` : ""}
               {site.contact.postalCode} {site.contact.city}
             </li>
-            <li>{site.contact.phone}</li>
             <li>{site.contact.email}</li>
             {site.contact.socials.whatsapp && (
               <li>
