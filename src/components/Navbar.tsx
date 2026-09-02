@@ -8,12 +8,21 @@ import Logo from "./Logo";
 import type { Kitten } from "@/lib/kittens";
 import type { LitterStatus } from "@/lib/store";
 
-const NAV_LINKS = [
+type NavChild = { href: string; label: string };
+type NavLink = { href: string; label: string; children?: NavChild[] };
+
+const NAV_LINKS: NavLink[] = [
   { href: "/", label: "Accueil" },
   { href: "/presentation", label: "Présentation" },
-  { href: "/reproducteurs", label: "Reproducteurs" },
-  { href: "/chatons", label: "Chatons disponibles" },
-  { href: "/tarifs", label: "Tarifs" },
+  {
+    href: "/chatons",
+    label: "Nos Bengals",
+    children: [
+      { href: "/reproducteurs", label: "Reproducteurs" },
+      { href: "/chatons", label: "Chatons disponibles" },
+      { href: "/chatons#tarifs", label: "Tarifs" },
+    ],
+  },
   { href: "/galerie", label: "Galerie" },
   { href: "/documentation", label: "Documentation" },
   { href: "/faq", label: "FAQ" },
@@ -49,9 +58,6 @@ export default function Navbar({
         ? "Anciens chatons"
         : "Gestation en cours";
 
-  const showDropdown =
-    litterStatus.mode === "gestation" || dropdownKittens.length > 0;
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -79,16 +85,17 @@ export default function Navbar({
 
         <nav className="hidden lg:flex items-center gap-1">
           {NAV_LINKS.map((link) => {
-            const isChatons = link.href === "/chatons";
+            const hasChildren = !!link.children;
             const active =
               pathname === link.href ||
-              (link.href !== "/" && pathname.startsWith(link.href));
+              (link.href !== "/" && pathname.startsWith(link.href)) ||
+              (link.children?.some((c) => pathname.startsWith(c.href.split("#")[0])) ?? false);
             return (
               <div
                 key={link.href}
                 className="relative"
-                onMouseEnter={() => isChatons && setDropdownOpen(true)}
-                onMouseLeave={() => isChatons && setDropdownOpen(false)}
+                onMouseEnter={() => hasChildren && setDropdownOpen(true)}
+                onMouseLeave={() => hasChildren && setDropdownOpen(false)}
               >
                 <Link
                   href={link.href}
@@ -106,7 +113,7 @@ export default function Navbar({
                 </Link>
 
                 <AnimatePresence>
-                  {isChatons && dropdownOpen && showDropdown && (
+                  {hasChildren && dropdownOpen && (
                     <motion.div
                       initial={{ opacity: 0, y: 8, scale: 0.98 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -115,6 +122,13 @@ export default function Navbar({
                       className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-72"
                     >
                       <div className="rounded-xl border border-eden-gold/30 bg-eden-cream shadow-xl overflow-hidden">
+                        <Link
+                          href="/reproducteurs"
+                          className="block px-4 py-3 text-sm font-semibold text-eden-ink border-b border-eden-gold/20 hover:bg-eden-gold/10 transition-colors"
+                        >
+                          Nos reproducteurs →
+                        </Link>
+
                         <div className="px-4 py-2 text-[11px] uppercase tracking-widest text-eden-ink/60 bg-eden-cream-soft">
                           {dropdownHeader}
                         </div>
@@ -123,7 +137,7 @@ export default function Navbar({
                             {litterStatus.gestationMessage ||
                               "Une nouvelle portée est en préparation !"}
                           </p>
-                        ) : (
+                        ) : dropdownKittens.length > 0 ? (
                           <ul>
                             {dropdownKittens.map((k) => (
                               <li key={k.id}>
@@ -139,6 +153,10 @@ export default function Navbar({
                               </li>
                             ))}
                           </ul>
+                        ) : (
+                          <p className="px-4 py-3 text-sm text-eden-ink/50">
+                            Aucun chaton à afficher pour le moment.
+                          </p>
                         )}
                         <Link
                           href="/chatons"
@@ -147,6 +165,12 @@ export default function Navbar({
                           {litterStatus.mode === "gestation"
                             ? "En savoir plus →"
                             : "Voir tous les chatons →"}
+                        </Link>
+                        <Link
+                          href="/chatons#tarifs"
+                          className="block px-4 py-2.5 text-sm text-eden-ink/70 border-t border-eden-gold/10 hover:bg-eden-gold/10 transition-colors"
+                        >
+                          Tarifs →
                         </Link>
                       </div>
                     </motion.div>
@@ -189,18 +213,35 @@ export default function Navbar({
             className="lg:hidden overflow-hidden border-t border-eden-gold/20 bg-eden-cream"
           >
             <ul className="px-4 py-2">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className={`block py-3 text-base ${
-                      pathname === link.href ? "text-eden-rust" : "text-eden-ink"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const active =
+                  pathname === link.href ||
+                  (link.children?.some((c) => pathname.startsWith(c.href.split("#")[0])) ?? false);
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className={`block py-3 text-base ${active ? "text-eden-rust" : "text-eden-ink"}`}
+                    >
+                      {link.label}
+                    </Link>
+                    {link.children && (
+                      <ul className="pl-4 pb-2 space-y-1">
+                        {link.children.map((child) => (
+                          <li key={child.href}>
+                            <Link
+                              href={child.href}
+                              className="block py-1.5 text-sm text-eden-ink/70 hover:text-eden-rust"
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </motion.nav>
         )}

@@ -6,7 +6,7 @@ const LINKS = [
   { href: "/presentation", label: "Présentation" },
   { href: "/reproducteurs", label: "Reproducteurs" },
   { href: "/chatons", label: "Chatons disponibles" },
-  { href: "/tarifs", label: "Tarifs" },
+  { href: "/chatons#tarifs", label: "Tarifs" },
   { href: "/galerie", label: "Galerie" },
   { href: "/documentation", label: "Documentation officielle" },
   { href: "/faq", label: "FAQ" },

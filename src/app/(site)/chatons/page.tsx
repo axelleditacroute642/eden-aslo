@@ -3,14 +3,58 @@ import AnimatedSection from "@/components/AnimatedSection";
 import KittenCard from "@/components/KittenCard";
 import GestationCountdown from "@/components/GestationCountdown";
 import LitterDevelopmentTimeline from "@/components/LitterDevelopmentTimeline";
-import { readKittens, readLitterStatus } from "@/lib/store";
+import { readKittens, readLitterStatus, readSite, type SiteData } from "@/lib/store";
 
 export const metadata: Metadata = {
   title: "Chatons disponibles — L'Eden d'Aslo",
 };
 
+function PricingSection({ pricing }: { pricing: SiteData["pricing"] }) {
+  return (
+    <AnimatedSection
+      id="tarifs"
+      className="mt-16 pt-14 border-t border-eden-gold/20 scroll-mt-24"
+    >
+      <h2 className="font-heading text-3xl mb-3">Tarifs</h2>
+      <p className="text-eden-ink/70 leading-relaxed max-w-2xl mb-8">
+        {pricing.intro}
+      </p>
+
+      <div className="rounded-xl bg-eden-green text-eden-cream px-6 py-8 text-center border border-eden-gold/40">
+        <p className="text-sm uppercase tracking-widest text-eden-gold-light mb-2">
+          Fourchette de prix
+        </p>
+        <p className="font-heading text-3xl">{pricing.priceRange}</p>
+      </div>
+
+      <h3 className="font-heading text-2xl mt-10 mb-5">
+        Ce qui est remis au futur propriétaire
+      </h3>
+      <ul className="grid gap-3 sm:grid-cols-2">
+        {pricing.includes.map((item, i) => (
+          <li
+            key={i}
+            className="flex items-start gap-3 p-4 rounded-lg bg-white border border-eden-gold/20 hover:border-eden-gold/50 hover:-translate-y-0.5 transition-all"
+          >
+            <span className="mt-0.5 text-eden-gold">✓</span>
+            <span className="text-sm text-eden-ink/80">{item}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-8 rounded-xl border border-eden-gold/30 bg-eden-cream-soft p-6">
+        <p className="text-sm text-eden-ink/70 leading-relaxed">{pricing.notes}</p>
+      </div>
+    </AnimatedSection>
+  );
+}
+
 export default async function ChatonsPage() {
-  const [kittens, litterStatus] = await Promise.all([readKittens(), readLitterStatus()]);
+  const [kittens, litterStatus, site] = await Promise.all([
+    readKittens(),
+    readLitterStatus(),
+    readSite(),
+  ]);
   const order = { disponible: 0, réservé: 1, vendu: 2 } as const;
   const anciens = [...kittens]
     .filter((k) => k.status === "vendu")
@@ -52,6 +96,8 @@ export default async function ChatonsPage() {
             </div>
           </AnimatedSection>
         )}
+
+        <PricingSection pricing={site.pricing} />
       </div>
     );
   }
@@ -78,6 +124,8 @@ export default async function ChatonsPage() {
         ) : (
           <p className="text-eden-ink/50">Aucun ancien chaton à afficher pour le moment.</p>
         )}
+
+        <PricingSection pricing={site.pricing} />
       </div>
     );
   }
@@ -112,6 +160,8 @@ export default async function ChatonsPage() {
       {enCours.length === 0 && (
         <p className="text-eden-ink/50">Aucun chaton disponible pour le moment.</p>
       )}
+
+      <PricingSection pricing={site.pricing} />
     </div>
   );
 }
