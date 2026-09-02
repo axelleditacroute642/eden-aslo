@@ -4,7 +4,6 @@ import "../globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
-import { readKittens, readLitterStatus } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
@@ -45,15 +44,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const [kittens, litterStatus] = await Promise.all([readKittens(), readLitterStatus()]);
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="fr"
       className={`${playfair.variable} ${jost.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-eden-cream text-eden-ink">
-        <Navbar kittens={kittens} litterStatus={litterStatus} />
+        <Navbar />
         <main className="flex-1">
           <PageTransition>{children}</PageTransition>
         </main>

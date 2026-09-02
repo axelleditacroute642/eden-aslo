@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
-import type { Kitten } from "@/lib/kittens";
-import type { LitterStatus } from "@/lib/store";
 
 type NavChild = { href: string; label: string };
 type NavLink = { href: string; label: string; children?: NavChild[] };
@@ -18,8 +16,8 @@ const NAV_LINKS: NavLink[] = [
     href: "/chatons",
     label: "Nos Bengals",
     children: [
-      { href: "/reproducteurs", label: "Reproducteurs" },
-      { href: "/chatons", label: "Chatons disponibles" },
+      { href: "/reproducteurs", label: "Nos reproducteurs" },
+      { href: "/chatons", label: "Nos chatons" },
       { href: "/chatons#tarifs", label: "Tarifs" },
     ],
   },
@@ -29,34 +27,11 @@ const NAV_LINKS: NavLink[] = [
   { href: "/contact", label: "Contact" },
 ];
 
-export default function Navbar({
-  kittens,
-  litterStatus,
-}: {
-  kittens: Kitten[];
-  litterStatus: LitterStatus;
-}) {
+export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const dropdownKittens =
-    litterStatus.mode === "portee"
-      ? kittens.filter((k) => k.status === "disponible").slice(0, 4)
-      : litterStatus.mode === "aucune"
-        ? [...kittens]
-            .filter((k) => k.status === "vendu")
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .slice(0, 4)
-        : [];
-
-  const dropdownHeader =
-    litterStatus.mode === "portee"
-      ? "Actuellement disponibles"
-      : litterStatus.mode === "aucune"
-        ? "Anciens chatons"
-        : "Gestation en cours";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -119,59 +94,18 @@ export default function Navbar({
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.98 }}
                       transition={{ duration: 0.18, ease: "easeOut" }}
-                      className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-72"
+                      className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-56"
                     >
                       <div className="rounded-xl border border-eden-gold/30 bg-eden-cream shadow-xl overflow-hidden">
-                        <Link
-                          href="/reproducteurs"
-                          className="block px-4 py-3 text-sm font-semibold text-eden-ink border-b border-eden-gold/20 hover:bg-eden-gold/10 transition-colors"
-                        >
-                          Nos reproducteurs →
-                        </Link>
-
-                        <div className="px-4 py-2 text-[11px] uppercase tracking-widest text-eden-ink/60 bg-eden-cream-soft">
-                          {dropdownHeader}
-                        </div>
-                        {litterStatus.mode === "gestation" ? (
-                          <p className="px-4 py-3 text-sm text-eden-ink/70">
-                            {litterStatus.gestationMessage ||
-                              "Une nouvelle portée est en préparation !"}
-                          </p>
-                        ) : dropdownKittens.length > 0 ? (
-                          <ul>
-                            {dropdownKittens.map((k) => (
-                              <li key={k.id}>
-                                <Link
-                                  href={`/chatons/${k.slug}`}
-                                  className="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-eden-gold/10 transition-colors"
-                                >
-                                  <span>{k.name}</span>
-                                  <span className="text-xs text-eden-ink/50">
-                                    {k.sex === "Mâle" ? "♂" : "♀"} · {k.coat.color.split(" ")[0]}
-                                  </span>
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <p className="px-4 py-3 text-sm text-eden-ink/50">
-                            Aucun chaton à afficher pour le moment.
-                          </p>
-                        )}
-                        <Link
-                          href="/chatons"
-                          className="block px-4 py-2.5 text-sm text-eden-rust font-medium border-t border-eden-gold/20 hover:bg-eden-gold/10 transition-colors"
-                        >
-                          {litterStatus.mode === "gestation"
-                            ? "En savoir plus →"
-                            : "Voir tous les chatons →"}
-                        </Link>
-                        <Link
-                          href="/chatons#tarifs"
-                          className="block px-4 py-2.5 text-sm text-eden-ink/70 border-t border-eden-gold/10 hover:bg-eden-gold/10 transition-colors"
-                        >
-                          Tarifs →
-                        </Link>
+                        {link.children!.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className="block px-4 py-2.5 text-sm text-eden-ink hover:bg-eden-gold/10 transition-colors"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
                       </div>
                     </motion.div>
                   )}
