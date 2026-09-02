@@ -16,6 +16,10 @@ function instagramHandle(value: string) {
   return value.startsWith("@") ? value.slice(1) : value;
 }
 
+function instagramDisplay(value: string) {
+  return value.startsWith("@") ? value : `@${value}`;
+}
+
 function whatsappDigits(value: string) {
   return value.replace(/\D/g, "");
 }
@@ -69,13 +73,16 @@ export default async function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-eden-cream/10 text-eden-gold-light hover:bg-eden-gold hover:text-eden-green transition-colors"
+                  className="flex items-center gap-2 rounded-full bg-eden-cream/10 pl-2 pr-3 py-1.5 text-xs text-eden-gold-light hover:bg-eden-gold hover:text-eden-green transition-colors"
                 >
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="2" y="2" width="20" height="20" rx="5" />
-                    <circle cx="12" cy="12" r="4" />
-                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-                  </svg>
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="2" y="2" width="20" height="20" rx="5" />
+                      <circle cx="12" cy="12" r="4" />
+                      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                    </svg>
+                  </span>
+                  {instagramDisplay(site.contact.socials.instagram)}
                 </a>
               )}
               {site.contact.socials.whatsapp && (

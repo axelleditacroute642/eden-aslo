@@ -89,7 +89,19 @@ function writeKey(key: string, data: unknown) {
 
 export async function readSite(): Promise<SiteData> {
   const data = await readKey("site.json", siteFallback as SiteData);
-  return { ...(siteFallback as SiteData), ...data };
+  const fallback = siteFallback as SiteData;
+  return {
+    ...fallback,
+    ...data,
+    home: { ...fallback.home, ...data.home },
+    presentation: { ...fallback.presentation, ...data.presentation },
+    pricing: { ...fallback.pricing, ...data.pricing },
+    contact: {
+      ...fallback.contact,
+      ...data.contact,
+      socials: { ...fallback.contact.socials, ...data.contact?.socials },
+    },
+  };
 }
 
 export function writeSite(data: SiteData) {
