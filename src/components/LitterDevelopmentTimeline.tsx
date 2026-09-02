@@ -4,6 +4,7 @@ import {
   getDevelopmentProgress,
   getDevelopmentSentence,
 } from "@/lib/litter-development";
+import { formatBirthDate } from "@/lib/kittens";
 
 export default function LitterDevelopmentTimeline({ birthDate }: { birthDate: string }) {
   const daysOld = getDaysOld(birthDate);
@@ -12,7 +13,12 @@ export default function LitterDevelopmentTimeline({ birthDate }: { birthDate: st
 
   return (
     <div className="rounded-xl border border-eden-gold/20 bg-white p-6 sm:p-8">
-      <h2 className="font-heading text-xl mb-3">Évolution de la portée</h2>
+      <div className="flex items-center justify-between gap-4 flex-wrap mb-3">
+        <h2 className="font-heading text-xl">Évolution de la portée</h2>
+        <span className="text-xs uppercase tracking-wider text-eden-ink/50">
+          Née le {formatBirthDate(birthDate)}
+        </span>
+      </div>
       <p className="text-eden-ink/80 leading-relaxed mb-8">{sentence}</p>
 
       <div className="relative h-2 rounded-full bg-eden-gold/15">
