@@ -30,6 +30,7 @@ function whatsappHref(value: string) {
 
 export default async function Footer() {
   const site = await readSite();
+  const displayPhone = site.contact.phone || site.contact.socials.whatsapp;
   return (
     <footer className="bg-eden-green text-eden-cream mt-24 border-t-2 border-eden-gold/40">
       <div className="mx-auto max-w-6xl px-6 py-14 grid gap-10 sm:grid-cols-3">
@@ -80,9 +81,11 @@ export default async function Footer() {
                   </svg>
                 </a>
               )}
-              <a href={`tel:${site.contact.phone.replace(/\s+/g, "")}`} className="hover:text-eden-gold-light transition-colors">
-                {site.contact.phone}
-              </a>
+              {displayPhone && (
+                <a href={`tel:${displayPhone.replace(/\s+/g, "")}`} className="hover:text-eden-gold-light transition-colors">
+                  {displayPhone}
+                </a>
+              )}
             </li>
           </ul>
 

@@ -16,6 +16,7 @@ function whatsappHref(value: string) {
 export default async function ContactPage() {
   const site = await readSite();
   const { contact } = site;
+  const displayPhone = contact.phone || contact.socials.whatsapp;
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
@@ -83,7 +84,7 @@ export default async function ContactPage() {
               </span>
               <div>
                 <h2 className="font-heading text-lg">WhatsApp</h2>
-                <p className="text-sm text-eden-ink/70 mt-1">{contact.phone}</p>
+                <p className="text-sm text-eden-ink/70 mt-1">{displayPhone}</p>
                 <p className="text-xs text-eden-ink/50 mt-2">{contact.hours}</p>
               </div>
             </a>
