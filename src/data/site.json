@@ -62,6 +62,38 @@
       "filename": "certificat-de-retractation.pdf"
     }
   ],
+  "faq": [
+    {
+      "id": "prix",
+      "question": "Quel est le prix d'un chaton ?",
+      "answer": "Le prix se situe entre 1800 € et 2200 € selon la lignée, la robe et le sexe du chaton. Un acompte est demandé pour valider la réservation, le solde étant réglé au départ du chaton."
+    },
+    {
+      "id": "depart",
+      "question": "À quel âge le chaton peut-il partir ?",
+      "answer": "Les chatons partent au plus tôt à 13 semaines, une fois leur primo-vaccination et leur identification effectuées, conformément à la réglementation en vigueur."
+    },
+    {
+      "id": "documents",
+      "question": "Quels documents sont fournis avec le chaton ?",
+      "answer": "Chaque chaton part avec son pedigree LOOF, son certificat vétérinaire de bonne santé, son carnet de vaccination et son contrat de vente. Retrouvez tous les détails sur la page Documentation."
+    },
+    {
+      "id": "visite",
+      "question": "Peut-on venir visiter la chatterie ?",
+      "answer": "Oui, les visites se font uniquement sur rendez-vous. Contactez-nous par téléphone, email ou WhatsApp pour convenir d'un créneau."
+    },
+    {
+      "id": "sante",
+      "question": "Les chats sont-ils testés génétiquement ?",
+      "answer": "Nos reproducteurs sont testés (notamment FIV/FeLV) et suivis vétérinairement tout au long de l'année pour garantir des chatons en pleine santé."
+    },
+    {
+      "id": "reservation",
+      "question": "Comment réserver un chaton ?",
+      "answer": "Consultez la page Chatons disponibles, puis contactez-nous pour organiser la réservation. Un acompte est demandé pour bloquer le chaton choisi."
+    }
+  ],
   "contact": {
     "catteryName": "L'Eden d'Aslo",
     "address": "",
@@ -73,7 +105,8 @@
     "hours": "Sur rendez-vous, tous les jours de 9h à 19h",
     "socials": {
       "instagram": "@edendaslo",
-      "facebook": "L'Eden d'Aslo"
+      "facebook": "L'Eden d'Aslo",
+      "whatsapp": "06 12 34 56 78"
     }
   }
 }

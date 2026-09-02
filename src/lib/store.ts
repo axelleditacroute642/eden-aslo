@@ -32,6 +32,11 @@ export type SiteData = {
     filename: string;
     url?: string;
   }[];
+  faq: {
+    id: string;
+    question: string;
+    answer: string;
+  }[];
   contact: {
     catteryName: string;
     address: string;
@@ -44,6 +49,7 @@ export type SiteData = {
     socials: {
       instagram: string;
       facebook: string;
+      whatsapp: string;
     };
   };
 };

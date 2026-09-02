@@ -8,6 +8,7 @@ const NAV = [
   { href: "/admin/reproducteurs", label: "Reproducteurs" },
   { href: "/admin/tarifs", label: "Tarifs" },
   { href: "/admin/documentation", label: "Documentation" },
+  { href: "/admin/faq", label: "FAQ" },
   { href: "/admin/contact", label: "Contact" },
   { href: "/admin/chatons", label: "Chatons" },
   { href: "/admin/galerie", label: "Galerie" },

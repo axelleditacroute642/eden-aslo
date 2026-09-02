@@ -82,6 +82,13 @@ export default async function AdminContactPage() {
           <input id="facebook" name="facebook" defaultValue={contact.socials.facebook} className={inputClass} />
         </div>
 
+        <div>
+          <label className={labelClass} htmlFor="whatsapp">
+            WhatsApp
+          </label>
+          <input id="whatsapp" name="whatsapp" defaultValue={contact.socials.whatsapp} className={inputClass} />
+        </div>
+
         <div className="sm:col-span-2 mt-2">
           <SubmitButton>Enregistrer</SubmitButton>
         </div>

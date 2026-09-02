@@ -19,6 +19,7 @@ export async function updateContact(formData: FormData) {
     socials: {
       instagram: get("instagram"),
       facebook: get("facebook"),
+      whatsapp: get("whatsapp"),
     },
   };
 
