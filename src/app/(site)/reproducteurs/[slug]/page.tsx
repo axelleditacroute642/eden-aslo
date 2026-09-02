@@ -89,12 +89,8 @@ export default async function BreederPage({
                 <dd className="text-right">{breeder.pedigree}</dd>
               </div>
               <div className="flex justify-between gap-4">
-                <dt className="text-eden-ink/50">Couleur</dt>
+                <dt className="text-eden-ink/50">Robe</dt>
                 <dd className="text-right">{breeder.coat.color}</dd>
-              </div>
-              <div className="flex justify-between gap-4">
-                <dt className="text-eden-ink/50">Motif</dt>
-                <dd className="text-right">{breeder.coat.pattern}</dd>
               </div>
               <div className="flex justify-between gap-4">
                 <dt className="text-eden-ink/50">Couleur des yeux</dt>
